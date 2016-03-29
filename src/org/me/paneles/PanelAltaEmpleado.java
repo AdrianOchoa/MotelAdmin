@@ -8,6 +8,7 @@ package org.me.paneles;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.components.JSpinField;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButtonMenuItem;
@@ -49,8 +50,8 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
         jtfCelular = new javax.swing.JTextField();
         jlDireccion = new javax.swing.JLabel();
         jtfDireccion = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
+        jlFecha = new javax.swing.JLabel();
+        jcFechaIngreso = new com.toedter.calendar.JCalendar();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jlSalario = new javax.swing.JLabel();
@@ -72,45 +73,15 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
 
         jlApellidoPaterno.setText("Apellido paterno");
 
-        jtfApellidoPaterno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfApellidoPaternoActionPerformed(evt);
-            }
-        });
-
         jlApellidoMaterno.setText("Apellido materno");
-
-        jtfApellidoMaterno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfApellidoMaternoActionPerformed(evt);
-            }
-        });
 
         jlCelular.setText("Celular");
 
-        jtfCelular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfCelularActionPerformed(evt);
-            }
-        });
-
         jlDireccion.setText("Dirección");
 
-        jtfDireccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfDireccionActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Selecciona en el calendario la fecha de ingreso");
+        jlFecha.setText("Selecciona en el calendario la fecha de ingreso");
 
         jlSalario.setText("Salario");
-
-        jtfSalario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfSalarioActionPerformed(evt);
-            }
-        });
 
         jlHorarioEntrada.setText("Horario de Entrada");
 
@@ -126,18 +97,7 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
 
         jlContrasena.setText("Contraseña");
 
-        jpContrasena.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jpContrasenaActionPerformed(evt);
-            }
-        });
-
         jbAceptar.setText("Aceptar");
-        jbAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAceptarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -151,7 +111,7 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
                         .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(96, 96, 96))
                         .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -163,7 +123,7 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
                         .addComponent(jlApellidoMaterno, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jlCelular, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jlDireccion, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jlFecha, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
@@ -218,9 +178,9 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
+                .addComponent(jlFecha)
                 .addGap(18, 18, 18)
-                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -247,40 +207,12 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfApellidoPaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfApellidoPaternoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfApellidoPaternoActionPerformed
-
-    private void jtfApellidoMaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfApellidoMaternoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfApellidoMaternoActionPerformed
-
-    private void jtfCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCelularActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfCelularActionPerformed
-
-    private void jtfDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDireccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfDireccionActionPerformed
-
-    private void jtfSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSalarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfSalarioActionPerformed
-
-    private void jpContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpContrasenaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jpContrasenaActionPerformed
-
-    private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbAceptarActionPerformed
-
     public JCalendar getjCalendar1() {
-        return jCalendar1;
+        return jcFechaIngreso;
     }
 
     public void setjCalendar1(JCalendar jCalendar1) {
-        this.jCalendar1 = jCalendar1;
+        this.jcFechaIngreso = jCalendar1;
     }
 
     public JRadioButtonMenuItem getjRadioButtonMenuItem1() {
@@ -396,11 +328,35 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
     }
 
     public JLabel getjLabel1() {
-        return jLabel1;
+        return jlFecha;
     }
 
     public void setjLabel1(JLabel jLabel1) {
-        this.jLabel1 = jLabel1;
+        this.jlFecha = jLabel1;
+    }
+
+    public JButton getJbAceptar() {
+        return jbAceptar;
+    }
+
+    public void setJbAceptar(JButton jbAceptar) {
+        this.jbAceptar = jbAceptar;
+    }
+
+    public JCalendar getJcFechaIngreso() {
+        return jcFechaIngreso;
+    }
+
+    public void setJcFechaIngreso(JCalendar jcFechaIngreso) {
+        this.jcFechaIngreso = jcFechaIngreso;
+    }
+
+    public JLabel getJlFecha() {
+        return jlFecha;
+    }
+
+    public void setJlFecha(JLabel jlFecha) {
+        this.jlFecha = jlFecha;
     }
 
    
@@ -487,18 +443,18 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private com.toedter.components.JSpinField jSpinField1;
     private javax.swing.JButton jbAceptar;
+    private com.toedter.calendar.JCalendar jcFechaIngreso;
     private javax.swing.JLabel jlApellidoMaterno;
     private javax.swing.JLabel jlApellidoPaterno;
     private javax.swing.JLabel jlCelular;
     private javax.swing.JLabel jlContrasena;
     private javax.swing.JLabel jlDireccion;
+    private javax.swing.JLabel jlFecha;
     private javax.swing.JLabel jlHoraSalida;
     private javax.swing.JLabel jlHorarioEntrada;
     private javax.swing.JLabel jlNombreEmpleado;

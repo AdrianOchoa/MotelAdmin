@@ -34,7 +34,7 @@
                       <Component id="jtfDireccion" alignment="1" min="-2" pref="391" max="-2" attributes="0"/>
                       <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jCalendar1" min="-2" pref="286" max="-2" attributes="0"/>
+                          <Component id="jcFechaIngreso" min="-2" pref="286" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
@@ -48,7 +48,7 @@
                       <Component id="jlApellidoMaterno" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jlCelular" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jlDireccion" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlFecha" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" attributes="0">
@@ -121,9 +121,9 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="jlFecha" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jCalendar1" min="-2" pref="212" max="-2" attributes="0"/>
+              <Component id="jcFechaIngreso" min="-2" pref="212" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -169,9 +169,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfApellidoPaterno">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfApellidoPaternoActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jlApellidoMaterno">
       <Properties>
@@ -179,9 +176,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfApellidoMaterno">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfApellidoMaternoActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jlCelular">
       <Properties>
@@ -189,9 +183,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfCelular">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfCelularActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jlDireccion">
       <Properties>
@@ -199,16 +190,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfDireccion">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfDireccionActionPerformed"/>
-      </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jlFecha">
       <Properties>
         <Property name="text" type="java.lang.String" value="Selecciona en el calendario la fecha de ingreso"/>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JCalendar" name="jCalendar1">
+    <Component class="com.toedter.calendar.JCalendar" name="jcFechaIngreso">
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
@@ -220,9 +208,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfSalario">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfSalarioActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jlHorarioEntrada">
       <Properties>
@@ -440,17 +425,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="jpContrasena">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jpContrasenaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbAceptar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Aceptar"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAceptarActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

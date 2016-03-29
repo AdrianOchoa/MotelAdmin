@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import org.me.paneles.PanelAltaEmpleado;
+import org.me.paneles.PanelAltaProducto;
+import org.me.paneles.PanelRentaHabitacion;
 import org.me.ventanas.VentanaPrincipal;
 
 /**
@@ -43,11 +45,11 @@ public class ListenerMenu implements ActionListener {
                 System.out.println("3");
                 JFrame f = new JFrame();
                 f.setSize(620,600);
-                f.setDefaultCloseOperation(3);
+                f.setDefaultCloseOperation(2);
                 
                 PanelAltaEmpleado panel = new PanelAltaEmpleado();
-                JScrollPane spPanelEmpleadonew = new JScrollPane(panel);
-                f.add(spPanelEmpleadonew);
+                JScrollPane spPanel = new JScrollPane(panel);
+                f.add(spPanel);
                 f.setVisible(true);
                 
                 break;
@@ -69,8 +71,14 @@ public class ListenerMenu implements ActionListener {
 
             case "altaInventario":
 
-                System.out.println("7");
-                break;
+                f = new JFrame();
+                f.setSize(550,301);
+                f.setDefaultCloseOperation(2);
+                
+                PanelAltaProducto panel2 = new PanelAltaProducto();
+                spPanel = new JScrollPane(panel2);
+                f.add(spPanel);
+                f.setVisible(true);
 
             case "bajaInventario":
 
@@ -113,6 +121,16 @@ public class ListenerMenu implements ActionListener {
             case "reabastecerInventario":
                 System.out.println("16");
 
+                break;
+            case "rentaHabitacion":
+                f = new JFrame();
+                f.setSize(550,549);
+                f.setDefaultCloseOperation(2);
+                
+                PanelRentaHabitacion panel3 = new PanelRentaHabitacion();
+                spPanel = new JScrollPane(panel3);
+                f.add(spPanel);
+                f.setVisible(true);
                 break;
 
         }
