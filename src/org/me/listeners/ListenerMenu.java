@@ -13,10 +13,18 @@ import java.awt.event.ActionListener;
  * @author Adrián
  */
 public class ListenerMenu implements ActionListener {
+    
+    private final String user;
+    private final String pass;
+    
+    public ListenerMenu (String user, String pass) {
+        this.user = user;
+        this.pass = pass;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Jellou world");
+        
     }
     
 }

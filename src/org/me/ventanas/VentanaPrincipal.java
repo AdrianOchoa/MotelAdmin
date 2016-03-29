@@ -32,7 +32,7 @@ public class VentanaPrincipal extends JFrame {
     private void init() throws IOException {
         Image image = ImageIO.read(this.getClass().getResource("/org/images/exe.png"));
         this.setIconImage(image);
-        this.setSize(640, 480);
+        this.setSize(1000, 700);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setJMenuBar(menu);

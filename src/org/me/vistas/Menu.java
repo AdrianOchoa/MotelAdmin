@@ -117,6 +117,7 @@ public class Menu extends JMenuBar {
                 keyEvent, ActionEvent.CTRL_MASK));
         item.getAccessibleContext().setAccessibleDescription(accessibleDescription);
         menu.add(item);
+        menu.addSeparator();
         item.setName(name);
     }
     
