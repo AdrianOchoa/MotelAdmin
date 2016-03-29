@@ -33,12 +33,14 @@ public class ListenerLogin implements ActionListener {
         SwingUtilities.windowForComponent(panelLogin).dispose();
         PanelPrincipal panel = new PanelPrincipal();
         Menu menu = new Menu();
-        ListenerMenu listenerMenu = new ListenerMenu();
-        menu.addListener(listenerMenu);
+        
+        
         try {
             VentanaPrincipal ventana = new VentanaPrincipal(panel, menu);
             ListenerVentana listenerVentana = new ListenerVentana();
             ventana.addListener(listenerVentana);
+            ListenerMenu listenerMenu = new ListenerMenu(ventana);
+            menu.addListener(listenerMenu);
         } catch (IOException ex) {
             Message.showErrorMessage(ex.getMessage());
         }
