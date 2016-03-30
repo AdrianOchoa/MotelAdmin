@@ -7,6 +7,7 @@ package org.me.modelos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -15,27 +16,27 @@ import java.sql.Statement;
  * @author Adrián
  */
 public class DataBaseHelper {
-    
+
     private Connection conexion;
     private Statement statement;
     private String servidor;
     private String puerto;
     private String usuario;
     private String pass;
-    
-    public DataBaseHelper () {
+
+    public DataBaseHelper() {
         this("jdbc:mysql://localhost/sistema_motel", "3306", "root", "");
     }
-    
+
     public DataBaseHelper(String usuario, String pass) {
         this("jdbc:mysql://localhost/sistema_motel", "3306", usuario, pass);
     }
-    
+
     public DataBaseHelper(String puerto, String usuario, String pass) {
         this("jdbc:mysql://localhost/sistema_motel", puerto, usuario, pass);
     }
-    
-    public DataBaseHelper (String servidor, String puerto, String usuario, String pass) {
+
+    public DataBaseHelper(String servidor, String puerto, String usuario, String pass) {
         conexion = null;
         statement = null;
         this.servidor = servidor;
@@ -43,16 +44,17 @@ public class DataBaseHelper {
         this.usuario = usuario;
         this.pass = pass;
     }
+
     public boolean iniciarConexion() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         conexion = (Connection) DriverManager.getConnection(servidor, usuario, pass);
         return true;
     }
-    
-    public boolean crearUsuario (String nombreEmpleado, String apellidoPE, 
-            String apellidoME, String celular, String direccion, 
-            String email, String fechaIngreso, double salario, 
-            String horarioE, String horarioS, String password, 
+
+    public boolean crearUsuario(String nombreEmpleado, String apellidoPE,
+            String apellidoME, String celular, String direccion,
+            String email, String fechaIngreso, double salario,
+            String horarioE, String horarioS, String password,
             String turnoSemana) throws SQLException {
         StringBuilder query = new StringBuilder();
         String user = nombreEmpleado + apellidoPE + apellidoME;
@@ -80,15 +82,25 @@ public class DataBaseHelper {
         executeQuery(query.toString());
         return true;
     }
-    
-    public boolean executeQuery (String query) throws SQLException {
+
+    public boolean executeQuery(String query) throws SQLException {
         statement = conexion.createStatement();
         statement.execute(query);
         return true;
     }
-    
-    public void cerrarConexion () throws SQLException {
+
+    public String executeQueryRS(String query) throws SQLException {
+        String r = "";
+        statement = conexion.createStatement();
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
+            r += rs.getString(1);
+        }
+        return r;
+    }
+
+    public void cerrarConexion() throws SQLException {
         conexion.close();
     }
-    
+
 }

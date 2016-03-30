@@ -21,12 +21,23 @@ import javax.swing.JTextField;
  * @author JR
  */
 public class PanelAltaEmpleado extends javax.swing.JPanel {
+    
+    private final String dbUser;
+    private final String dbPassword;
 
     /**
      * Creates new form PanelAltaEmpleado
+     * @param dbUser
+     * @param dbPassword
      */
-    public PanelAltaEmpleado() {
+    public PanelAltaEmpleado(String dbUser, String dbPassword) {
+        this.dbUser = dbUser;
+        this.dbPassword = dbPassword;
         initComponents();
+    }
+    
+    public boolean datosValidos () {
+        return true;
     }
 
     /**
@@ -471,4 +482,18 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
     private javax.swing.JTextField jtfNombreEmpleado;
     private javax.swing.JTextField jtfSalario;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the dbUser
+     */
+    public String getDbUser() {
+        return dbUser;
+    }
+
+    /**
+     * @return the dbPassword
+     */
+    public String getDbPassword() {
+        return dbPassword;
+    }
 }
