@@ -40,10 +40,14 @@ public class Menu extends JMenuBar {
     private JMenuItem jmiRespRestore;
 
     private JMenu jmProceso;
-
+    private JMenuItem jmiModificarInventario;
+    private JMenuItem jmiReabastecerInventario;
+            
+            
     private JMenu jmAyuda;
     private JMenuItem jmiAyudaManual;
     private JMenuItem jmiAyudaAcerca;
+    private JMenuItem jmiRentaHabitacion;
 
     public Menu() {
         initMenu();
@@ -99,6 +103,15 @@ public class Menu extends JMenuBar {
         this.add(jmRespaldo);
         
         jmProceso = new JMenu("Proceso");
+        jmiModificarInventario = new JMenuItem("Modificar inventario");
+        agregarParametros(jmiModificarInventario, KeyEvent.VK_I, 
+                "Cambia existencias del inventario", jmProceso, "modificarInventario");
+        jmiReabastecerInventario = new JMenuItem("Reabastecer inventario");
+        agregarParametros(jmiReabastecerInventario, KeyEvent.VK_J, 
+                "Reabastece inventario", jmProceso, "reabastecerInventario");
+        jmiRentaHabitacion = new JMenuItem("Renta de habitación");
+        agregarParametros(jmiRentaHabitacion, KeyEvent.VK_H, 
+                "Reabastece inventario", jmProceso, "rentaHabitacion");
         this.add(jmProceso);
 
         jmAyuda = new JMenu("Ayuda");
@@ -134,6 +147,9 @@ public class Menu extends JMenuBar {
         exportarReporte.addActionListener(listener);
         jmiRespBackup.addActionListener(listener);
         jmiRespRestore.addActionListener(listener);
+        jmiModificarInventario.addActionListener(listener);
+        jmiReabastecerInventario.addActionListener(listener);
+        jmiRentaHabitacion.addActionListener(listener);
         jmiAyudaManual.addActionListener(listener);
         jmiAyudaAcerca.addActionListener(listener);
     }
