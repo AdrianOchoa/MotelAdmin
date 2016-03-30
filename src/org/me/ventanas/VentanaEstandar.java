@@ -18,20 +18,29 @@ import javax.swing.JPanel;
 public class VentanaEstandar extends JFrame {
     
     private final JPanel panel;
+    private int x;
+    private int y;
     
     public VentanaEstandar (JPanel panel) throws IOException {
+        this(panel, 800, 600);
+    }
+    
+    public VentanaEstandar (JPanel panel, int x, int y) throws IOException {
         super("Administración");
         this.panel = panel;
+        this.x = x;
+        this.y = y;
         init();
     }
     
     private void init () throws IOException {
         Image image = ImageIO.read(this.getClass().getResource("/org/images/exe.png"));
         this.setIconImage(image);
-        this.setSize(800, 600);
+        this.setSize(x, y);
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
         this.setContentPane(panel);
+        this.setResizable(false);
+        this.setVisible(true);
     }
     
 }
