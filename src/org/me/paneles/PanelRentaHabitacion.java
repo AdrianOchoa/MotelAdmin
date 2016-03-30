@@ -40,8 +40,6 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
 
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jSpinField1 = new com.toedter.components.JSpinField();
-        jlIdEmpleado = new javax.swing.JLabel();
-        jtfIdEmpleado = new javax.swing.JTextField();
         jlApellidoPaterno = new javax.swing.JLabel();
         jtfIdHabitacion = new javax.swing.JTextField();
         jlIngreso = new javax.swing.JLabel();
@@ -55,8 +53,6 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
-
-        jlIdEmpleado.setText("ID del empleado");
 
         jlApellidoPaterno.setText("ID de la habitación");
 
@@ -77,13 +73,11 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(96, 96, 96))
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlIdEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlApellidoPaterno, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlIngreso, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jlHorarioInicio)
@@ -92,10 +86,9 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
                         .addGap(22, 22, 22)
                         .addComponent(jsMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfIdHabitacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
-                            .addComponent(jtfIdEmpleado)))))
+                        .addComponent(jlApellidoPaterno)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtfIdHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(211, 211, 211)
                 .addComponent(jbAceptar))
@@ -103,15 +96,11 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlIdEmpleado)
-                    .addComponent(jtfIdEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlApellidoPaterno)
                     .addComponent(jtfIdHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlHorarioInicio)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -127,7 +116,7 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbAceptar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -195,13 +184,7 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
         this.jlHorarioInicio = jlHorarioInicio;
     }
 
-    public JLabel getJlIdEmpleado() {
-        return jlIdEmpleado;
-    }
-
-    public void setJlIdEmpleado(JLabel jlIdEmpleado) {
-        this.jlIdEmpleado = jlIdEmpleado;
-    }
+   
 
     public JLabel getJlIngreso() {
         return jlIngreso;
@@ -227,13 +210,7 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
         this.jsMinutos = jsMinutos;
     }
 
-    public JTextField getJtfIdEmpleado() {
-        return jtfIdEmpleado;
-    }
-
-    public void setJtfIdEmpleado(JTextField jtfIdEmpleado) {
-        this.jtfIdEmpleado = jtfIdEmpleado;
-    }
+    
 
     public JTextField getJtfIdHabitacion() {
         return jtfIdHabitacion;
@@ -255,11 +232,9 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
     private com.toedter.calendar.JCalendar jcFecha;
     private javax.swing.JLabel jlApellidoPaterno;
     private javax.swing.JLabel jlHorarioInicio;
-    private javax.swing.JLabel jlIdEmpleado;
     private javax.swing.JLabel jlIngreso;
     private javax.swing.JSpinner jsHora;
     private javax.swing.JSpinner jsMinutos;
-    private javax.swing.JTextField jtfIdEmpleado;
     private javax.swing.JTextField jtfIdHabitacion;
     // End of variables declaration//GEN-END:variables
 }

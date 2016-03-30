@@ -76,6 +76,8 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
         jlContrasena = new javax.swing.JLabel();
         jpContrasena = new javax.swing.JPasswordField();
         jbAceptar = new javax.swing.JButton();
+        jlEmail = new javax.swing.JLabel();
+        jtfEmail = new javax.swing.JTextField();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -110,57 +112,66 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
 
         jbAceptar.setText("Aceptar");
 
+        jlEmail.setText("Correo electrónico");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jpContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jcFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(96, 96, 96))
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jlSalario)
-                            .addGap(81, 81, 81)
-                            .addComponent(jtfSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE))
-                        .addComponent(jlNombreEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jlApellidoPaterno, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jlApellidoMaterno, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jlCelular, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jlDireccion, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jlFecha, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jpContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jlSalario)
+                                    .addGap(81, 81, 81)
+                                    .addComponent(jtfSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE))
+                                .addComponent(jlNombreEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jlApellidoPaterno, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jlApellidoMaterno, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jlCelular, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jlDireccion, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jlFecha, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jlHoraSalida)
+                                            .addGap(44, 44, 44)
+                                            .addComponent(jsHoraS, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jlHorarioEntrada)
+                                            .addGap(22, 22, 22)
+                                            .addComponent(jsHoraE, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jsMinutosE, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jsMinutosS, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jbAceptar)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jlContrasena)
+                                        .addGap(270, 270, 270)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(113, 113, 113)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jtfApellidoMaterno, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jtfApellidoPaterno, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jtfNombreEmpleado)
+                                        .addComponent(jtfCelular, javax.swing.GroupLayout.Alignment.TRAILING)))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jlHoraSalida)
-                                    .addGap(44, 44, 44)
-                                    .addComponent(jsHoraS, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jlHorarioEntrada)
-                                    .addGap(22, 22, 22)
-                                    .addComponent(jsHoraE, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jsMinutosE, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jsMinutosS, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jbAceptar)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlContrasena)
-                                .addGap(270, 270, 270)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(113, 113, 113)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfApellidoMaterno, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jtfApellidoPaterno, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jtfNombreEmpleado)
-                                .addComponent(jtfCelular, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                    .addComponent(jlEmail)
+                                    .addGap(25, 25, 25)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jtfDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                                        .addComponent(jtfEmail))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(jcFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -186,13 +197,17 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlDireccion)
                     .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlEmail)
+                    .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlFecha)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -260,6 +275,22 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
 
     public JLabel getJlContrasena() {
         return jlContrasena;
+    }
+
+    public JLabel getJlEmail() {
+        return jlEmail;
+    }
+
+    public void setJlEmail(JLabel jlEmail) {
+        this.jlEmail = jlEmail;
+    }
+
+    public JTextField getJtfEmail() {
+        return jtfEmail;
+    }
+
+    public void setJtfEmail(JTextField jtfEmail) {
+        this.jtfEmail = jtfEmail;
     }
 
     public void setJlContrasena(JLabel jlContrasena) {
@@ -465,6 +496,7 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
     private javax.swing.JLabel jlCelular;
     private javax.swing.JLabel jlContrasena;
     private javax.swing.JLabel jlDireccion;
+    private javax.swing.JLabel jlEmail;
     private javax.swing.JLabel jlFecha;
     private javax.swing.JLabel jlHoraSalida;
     private javax.swing.JLabel jlHorarioEntrada;
@@ -479,6 +511,7 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
     private javax.swing.JTextField jtfApellidoPaterno;
     private javax.swing.JTextField jtfCelular;
     private javax.swing.JTextField jtfDireccion;
+    private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfNombreEmpleado;
     private javax.swing.JTextField jtfSalario;
     // End of variables declaration//GEN-END:variables
