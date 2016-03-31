@@ -24,18 +24,39 @@ public class DataBaseHelper {
     private String usuario;
     private String pass;
 
+    /**
+     * Constructor con datos estándar
+     */
     public DataBaseHelper() {
         this("jdbc:mysql://localhost/sistema_motel", "3306", "root", "");
     }
 
+    /**
+     * Constructor con host y puertos estándar
+     * @param usuario user de la base de datos
+     * @param pass contraseña de la base de datos
+     */
     public DataBaseHelper(String usuario, String pass) {
         this("jdbc:mysql://localhost/sistema_motel", "3306", usuario, pass);
     }
 
+    /**
+     * Constructor con servidor estandar
+     * @param puerto puerto del servidor mysql
+     * @param usuario user de la base de datos
+     * @param pass contraseña de la base de datos
+     */
     public DataBaseHelper(String puerto, String usuario, String pass) {
         this("jdbc:mysql://localhost/sistema_motel", puerto, usuario, pass);
     }
 
+    /**
+     * Constructor con datos específicos
+     * @param servidor Servidor de la base de datos (conexión remota)
+     * @param puerto puerto del servidor mysql
+     * @param usuario user de la base de datos
+     * @param pass contraseña de la base de datos
+     */
     public DataBaseHelper(String servidor, String puerto, String usuario, String pass) {
         conexion = null;
         statement = null;
@@ -45,12 +66,37 @@ public class DataBaseHelper {
         this.pass = pass;
     }
 
+    /**
+     * 
+     * @return true si la conexión se realizó correctamente, falso de otro modo
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public boolean iniciarConexion() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         conexion = (Connection) DriverManager.getConnection(servidor, usuario, pass);
         return true;
     }
 
+    /**
+     * Esta operación realiza la inserción de un empleado en la base de datos
+     * y crea un usuario en esta
+     * @param nombreEmpleado
+     * @param apellidoPE
+     * @param apellidoME
+     * @param celular
+     * @param direccion
+     * @param email
+     * @param fechaIngreso
+     * @param salario
+     * @param horarioE
+     * @param horarioS
+     * @param password
+     * @param turnoSemana
+     * @param user
+     * @return true si la operación se realizó correctamente, falso de otro modo
+     * @throws SQLException 
+     */
     public boolean crearUsuario(String nombreEmpleado, String apellidoPE,
             String apellidoME, String celular, String direccion,
             String email, String fechaIngreso, double salario,
@@ -107,6 +153,17 @@ public class DataBaseHelper {
         return true;
     }
     
+    /**
+     * Esta operación de de alta un producto en la base de datos
+     * @param nombreProducto
+     * @param marca
+     * @param existencias
+     * @param precioUnitario
+     * @param precioTotal
+     * @param tipo
+     * @return true si la operación se realizó con éxito, falso de otro modo
+     * @throws SQLException 
+     */
     public boolean altaProducto (String nombreProducto, String marca, 
             String existencias, String precioUnitario, 
             String precioTotal, String tipo) throws SQLException {
@@ -121,12 +178,24 @@ public class DataBaseHelper {
         return true;
     }
 
+    /**
+     * Este método realiza una inserción sin ResultSet en la base de datos
+     * @param query
+     * @return true si se realiza correctamente, false de otro modo
+     * @throws SQLException 
+     */
     public boolean executeQuery(String query) throws SQLException {
         statement = conexion.createStatement();
         statement.execute(query);
         return true;
     }
 
+    /**
+     * Esta operación realiza una query en la base de datos
+     * @param query
+     * @return un ResultSet con el resultado de la query
+     * @throws SQLException 
+     */
     public String executeQueryRS(String query) throws SQLException {
         String r = "";
         statement = conexion.createStatement();
@@ -142,6 +211,10 @@ public class DataBaseHelper {
         return statement.executeQuery(query);
     }
 
+    /**
+     * Esta operación cierra la conexión con la base de datos
+     * @throws SQLException 
+     */
     public void cerrarConexion() throws SQLException {
         conexion.close();
     }

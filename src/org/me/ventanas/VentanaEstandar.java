@@ -23,10 +23,22 @@ public class VentanaEstandar extends JFrame {
     private int y;
 
     
+    /**
+     * Constructor de un frame con tamaño estándar
+     * @param panel
+     * @throws IOException 
+     */
     public VentanaEstandar (JPanel panel) throws IOException {
         this(panel, 800, 600);
     }
     
+    /**
+     * Constructor de un frame con tamaño personalizado
+     * @param panel
+     * @param x el ancho del panel
+     * @param y el alto del panel
+     * @throws IOException 
+     */
     public VentanaEstandar (JPanel panel, int x, int y) throws IOException {
         super("Administración");
         this.panel = panel;
@@ -35,6 +47,10 @@ public class VentanaEstandar extends JFrame {
         init();
     }
     
+    /**
+     * Inicializa los componentes de la ventana
+     * @throws IOException 
+     */
     private void init () throws IOException {
         Image image = ImageIO.read(this.getClass().getResource("/org/images/exe.png"));
         this.setIconImage(image);

@@ -22,6 +22,15 @@ public class VentanaLogin extends JFrame {
     
     private final PanelLogin panelLogin;
     
+    /**
+     * 
+     * @param panelLogin
+     * @throws IOException
+     * @throws UnsupportedLookAndFeelException
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws IllegalAccessException 
+     */
     public VentanaLogin (PanelLogin panelLogin) throws IOException, 
             UnsupportedLookAndFeelException, ClassNotFoundException, 
             InstantiationException, IllegalAccessException {
@@ -30,6 +39,14 @@ public class VentanaLogin extends JFrame {
         initVentana();
     }
     
+    /**
+     * Inicializa los componentes de la ventana
+     * @throws IOException
+     * @throws UnsupportedLookAndFeelException
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws IllegalAccessException 
+     */
     private void initVentana () throws IOException, 
             UnsupportedLookAndFeelException, ClassNotFoundException, 
             InstantiationException, IllegalAccessException {

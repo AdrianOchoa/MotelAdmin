@@ -49,6 +49,9 @@ public class Menu extends JMenuBar {
     private JMenuItem jmiAyudaAcerca;
     private JMenuItem jmiRentaHabitacion;
 
+    /**
+     * 
+     */
     public Menu() {
         initMenu();
     }
@@ -124,6 +127,14 @@ public class Menu extends JMenuBar {
         this.add(jmAyuda);
     }
 
+    /**
+     * 
+     * @param item
+     * @param keyEvent
+     * @param accessibleDescription
+     * @param menu
+     * @param name 
+     */
     private void agregarParametros(JMenuItem item, int keyEvent, 
             String accessibleDescription, JMenu menu, String name) {
         item.setAccelerator(KeyStroke.getKeyStroke(

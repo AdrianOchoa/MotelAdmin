@@ -28,6 +28,10 @@ public class ListenerLogin implements ActionListener {
     private String usuario;
     private String password;
 
+    /**
+     * 
+     * @param panelLogin 
+     */
     public ListenerLogin(PanelLogin panelLogin) {
         this.panelLogin = panelLogin;
     }
