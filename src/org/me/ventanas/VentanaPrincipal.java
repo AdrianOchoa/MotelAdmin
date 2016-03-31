@@ -47,6 +47,7 @@ public class VentanaPrincipal extends JFrame {
         this.setVisible(true);
         this.setJMenuBar(menu);
         this.add(panelPrincipal);
+        setDefaultCloseOperation(0);
     }
     
     public void addListener (ListenerVentana listener) {
