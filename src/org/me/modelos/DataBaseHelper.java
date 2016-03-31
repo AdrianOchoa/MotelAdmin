@@ -55,10 +55,9 @@ public class DataBaseHelper {
             String apellidoME, String celular, String direccion,
             String email, String fechaIngreso, double salario,
             String horarioE, String horarioS, String password,
-            String turnoSemana) throws SQLException {
+            String turnoSemana, String user) throws SQLException {
         StringBuilder query = new StringBuilder();
-        String user = nombreEmpleado + apellidoPE + apellidoME;
-        query.append("INSERT INTO empleado "
+        query.append("INSERT INTO sistema_motel.empleado "
                 + "(nombreEmpleado, apellidoPE, apellidoME, celular, "
                 + "direccion, email, fechaIngreso, salario, horarioE, horarioS, "
                 + "contrasena, turnoSemana) values ('")
@@ -70,14 +69,34 @@ public class DataBaseHelper {
                 .append(", '").append(horarioE).append("', '")
                 .append(horarioS).append("', '").append(password)
                 .append("', '").append(turnoSemana).append("');");
+        executeQuery(query.toString());
+        
+        query = new StringBuilder();
         query.append("CREATE USER '").append(user)
                 .append("'@'localhost' IDENTIFIED BY '")
                 .append(password).append("';");
-        query.append("GRANT INSERT ON sistema_motel.renta TO ‘").append(user).append("’@'localhost’;");
-        query.append("GRANT SELECT ON sistema_motel.renta TO ‘").append(user).append("’@'localhost’;");
-        query.append("GRANT SELECT ON sistema_motel.habitacion TO ‘").append(user).append("’@'localhost’;");
-        query.append("GRANT SELECT ON sistema_motel.producto TO ‘").append(user).append("’@'localhost’;");
-        query.append("GRANT SELECT ON sistema_motel.reabastecimiento TO ‘").append(user).append("’@'localhost’;");
+        executeQuery(query.toString());
+        
+        query = new StringBuilder();
+        query.append("FLUSH PRIVILEGES;");
+        executeQuery(query.toString());
+        
+        query = new StringBuilder();
+        query.append("GRANT INSERT ON sistema_motel.renta TO '").append(user).append("'@'localhost';");
+        executeQuery(query.toString());
+        query = new StringBuilder();
+        query.append("GRANT SELECT ON sistema_motel.renta TO '").append(user).append("'@'localhost';");
+        executeQuery(query.toString());
+        query = new StringBuilder();
+        query.append("GRANT SELECT ON sistema_motel.habitacion TO '").append(user).append("'@'localhost';");
+        executeQuery(query.toString());
+        query = new StringBuilder();
+        query.append("GRANT SELECT ON sistema_motel.producto TO '").append(user).append("'@'localhost';");
+        executeQuery(query.toString());
+        query = new StringBuilder();
+        query.append("GRANT SELECT ON sistema_motel.reabastecimiento TO '").append(user).append("'@'localhost';");
+        executeQuery(query.toString());
+        query = new StringBuilder();
         query.append("FLUSH PRIVILEGES;");
         executeQuery(query.toString());
         return true;

@@ -6,7 +6,6 @@
 package org.me.paneles;
 
 import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDateChooser;
 import com.toedter.components.JSpinField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,18 +14,20 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import org.me.listeners.ListenerAltaEmpleado;
 
 /**
  *
  * @author JR
  */
 public class PanelAltaEmpleado extends javax.swing.JPanel {
-    
+
     private final String dbUser;
     private final String dbPassword;
 
     /**
      * Creates new form PanelAltaEmpleado
+     *
      * @param dbUser
      * @param dbPassword
      */
@@ -35,9 +36,41 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
         this.dbPassword = dbPassword;
         initComponents();
     }
-    
-    public boolean datosValidos () {
-        return true;
+
+    public boolean datosValidos() {
+        return camposLlenos()
+                && passValido()
+                && emailValido()
+                && sueldoValido();
+    }
+
+    private boolean sueldoValido() {
+        double sueldo;
+        try {
+            sueldo = Double.parseDouble(jtfSalario.getText());
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+
+    //Formato algo@algo.algo
+    private boolean emailValido() {
+        String email = jtfEmail.getText();
+        return email.matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+    }
+
+    //Mínimo 8 caracteres, máximo 16, minúsculas, mayúsculas, numeros sin caracteres raros
+    private boolean passValido() {
+        String pass = new String(jpContrasena.getPassword());
+        return pass.matches("[a-zA-Z0-9]{8,16}");
+    }
+
+    private boolean camposLlenos() {
+        return !jtfNombreEmpleado.getText().isEmpty() && !jtfApellidoPaterno.getText().isEmpty()
+                && !jtfApellidoMaterno.getText().isEmpty() && !jtfCelular.getText().isEmpty()
+                && !jtfDireccion.getText().isEmpty() && !jtfEmail.getText().isEmpty()
+                && !jtfSalario.getText().isEmpty() && jpContrasena.getPassword().length != 0;
     }
 
     /**
@@ -78,6 +111,8 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
         jbAceptar = new javax.swing.JButton();
         jlEmail = new javax.swing.JLabel();
         jtfEmail = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jcbTurno = new javax.swing.JComboBox();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -114,6 +149,10 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
 
         jlEmail.setText("Correo electrónico");
 
+        jLabel1.setText("Turno");
+
+        jcbTurno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Matutino", "Vespertino", "Nocturno"}));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,7 +162,6 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jpContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +206,13 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
                                     .addGap(25, 25, 25)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jtfDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
-                                        .addComponent(jtfEmail))))))
+                                        .addComponent(jtfEmail))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(85, 85, 85)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcbTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jpContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(126, 126, 126)
                         .addComponent(jcFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -227,7 +271,11 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlContrasena)
                     .addComponent(jpContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jcbTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbAceptar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -401,8 +449,6 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
         this.jlFecha = jlFecha;
     }
 
-   
-
     public JLabel getJlApellidoMaterno() {
         return jlApellidoMaterno;
     }
@@ -483,14 +529,19 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
         this.jtfNombreEmpleado = jtfNombreEmpleado;
     }
 
+    public void addListener(ListenerAltaEmpleado listener) {
+        jbAceptar.addActionListener(listener);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private com.toedter.components.JSpinField jSpinField1;
     private javax.swing.JButton jbAceptar;
     private com.toedter.calendar.JCalendar jcFechaIngreso;
+    private javax.swing.JComboBox jcbTurno;
     private javax.swing.JLabel jlApellidoMaterno;
     private javax.swing.JLabel jlApellidoPaterno;
     private javax.swing.JLabel jlCelular;
@@ -528,5 +579,12 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
      */
     public String getDbPassword() {
         return dbPassword;
+    }
+
+    /**
+     * @return the jcbTurno
+     */
+    public javax.swing.JComboBox getJcbTurno() {
+        return jcbTurno;
     }
 }
