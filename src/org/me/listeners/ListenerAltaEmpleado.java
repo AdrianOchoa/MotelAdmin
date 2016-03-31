@@ -38,6 +38,10 @@ public class ListenerAltaEmpleado implements ActionListener {
     private String turno;
     private String user;
     
+    /**
+     * 
+     * @param panel 
+     */
     public ListenerAltaEmpleado (PanelAltaEmpleado panel) {
         this.panel = panel;
     }
@@ -90,11 +94,12 @@ public class ListenerAltaEmpleado implements ActionListener {
             } catch (ClassNotFoundException | SQLException ex) {
                 Message.showErrorMessage("Error al crear el usuario en la base de datos.\n" + ex.getMessage());
             }
-        } else {
-            Message.showErrorMessage("Error.\nFalta completar de manera correcta alguno de los campos.");
-        }
+        } 
     }
     
+    /**
+     * resetea los campos del panel
+     */
     private void limpiarCampos () {
         panel.getJtfNombreEmpleado().setText("");
         panel.getJtfApellidoPaterno().setText("");

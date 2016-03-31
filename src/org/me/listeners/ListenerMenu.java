@@ -24,6 +24,11 @@ public class ListenerMenu implements ActionListener {
     private final String user;
     private final String pass;
 
+    /**
+     * 
+     * @param user
+     * @param pass 
+     */
     public ListenerMenu(String user, String pass) {
         this.user = user;
         this.pass = pass;
@@ -48,7 +53,7 @@ public class ListenerMenu implements ActionListener {
                     PanelAltaProducto panelAltaProducto = new PanelAltaProducto(user, pass);
                     ListenerAltaProducto listener = new ListenerAltaProducto(panelAltaProducto);
                     panelAltaProducto.addListener(listener);
-                    VentanaEstandar ventana = new VentanaEstandar(panelAltaProducto);
+                    VentanaEstandar ventana = new VentanaEstandar(panelAltaProducto, 550, 300);
                 } catch (IOException ex) {
                     Message.showErrorMessage(ex.getMessage());
                 }

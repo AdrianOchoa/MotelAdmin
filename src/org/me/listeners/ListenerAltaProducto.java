@@ -30,6 +30,10 @@ public class ListenerAltaProducto implements ActionListener {
     private String precioT;
     private String tipo;
 
+    /**
+     * 
+     * @param panel 
+     */
     public ListenerAltaProducto(PanelAltaProducto panel) {
         this.panel = panel;
     }
@@ -55,11 +59,12 @@ public class ListenerAltaProducto implements ActionListener {
             } catch (SQLException | ClassNotFoundException ex) {
                 Message.showErrorMessage("Error al dar de alta el producto.\n" + ex.getMessage());
             } 
-        } else {
-            Message.showErrorMessage("Error.\nFalta completar de manera correcta alguno de los campos.");
-        }
+        } 
     }
     
+    /**
+     * resetea los campos del panel
+     */
     private void limpiarCampos () {
         panel.getJtfNombreProducto().setText("");
         panel.getJtfMarca().setText("");

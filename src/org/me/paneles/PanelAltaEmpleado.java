@@ -15,13 +15,14 @@ import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import org.me.listeners.ListenerAltaEmpleado;
+import org.me.util.Message;
 
 /**
  *
  * @author JR
  */
 public class PanelAltaEmpleado extends javax.swing.JPanel {
-
+    
     private final String dbUser;
     private final String dbPassword;
 
@@ -37,6 +38,11 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
         initComponents();
     }
 
+    /**
+     * Comprueba todas las validaciones de los campos
+     *
+     * @return true si se cumplen todas las validaciones, false de otro modo
+     */
     public boolean datosValidos() {
         return camposLlenos()
                 && passValido()
@@ -45,38 +51,88 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
                 && sueldoValido();
     }
 
+    /**
+     * Comprueba que el sueldo sea una cantidad double válida
+     *
+     * @return true si el campo es válido, false de otro modo
+     */
     private boolean sueldoValido() {
         double sueldo;
         try {
             sueldo = Double.parseDouble(jtfSalario.getText());
             return true;
         } catch (NumberFormatException ex) {
+            Message.showErrorMessage("Error en el campo del sueldo.\nDebe contener"
+                    + "una cantidad doble válida");
+            return false;
+        }
+    }
+    
+    public boolean telefonoValido() {
+        String telefono = jtfCelular.getText();
+        if(telefono.matches("[0-9]{10}")) {
+            return true;
+        } else {
+            Message.showErrorMessage("Error en el campo teléfono.\n Debe contener"
+                    + "sólo 10 dígitos.");
             return false;
         }
     }
 
-    public boolean telefonoValido() {
-        String telefono = jtfCelular.getText();
-        return telefono.matches("[0-9]{10}");
-    }
-
-    //Formato algo@algo.algo
+    /**
+     * Comprueba que el email tenga la siguiente forma algo@algo.algo
+     *
+     * @return true si el campo es válido, false de otro modo
+     */
     private boolean emailValido() {
         String email = jtfEmail.getText();
-        return email.matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        if(email.matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+            return true;
+        } else {
+            Message.showErrorMessage("Error en el campo del email.\n Debe contener"
+                    + "un correo electrónico válido de la forma"
+                    + "algo@algo.com");
+            return false;
+        }
     }
 
-    //Mínimo 8 caracteres, máximo 16, minúsculas, mayúsculas, numeros sin caracteres raros
+    /**
+     * Comprueba que la contraseña tenga de 8 a 16 caracteres, mayúsculas,
+     * minúsculas y números
+     *
+     * @return true si el campo es válido, false de otro modo
+     */
     private boolean passValido() {
         String pass = new String(jpContrasena.getPassword());
-        return pass.matches("[a-zA-Z0-9]{8,16}");
+        if(pass.matches("[a-zA-Z0-9]{8,16}")) {
+            return true;
+        } else {
+            Message.showErrorMessage("Error en la campo contraseña.\nDebe tener al "
+                    + "menos 8 caracteres, máximo 16, y sólo puede"
+                    + "contener minúsculas, mayúsculas y números.");
+            return false;
+        }
     }
 
+    /**
+     * Comprueba que todos los campos estén llenos
+     *
+     * @return true si el campo es válido, false de otro modo
+     */
     private boolean camposLlenos() {
-        return !jtfNombreEmpleado.getText().isEmpty() && !jtfApellidoPaterno.getText().isEmpty()
-                && !jtfApellidoMaterno.getText().isEmpty() && !jtfCelular.getText().isEmpty()
-                && !jtfDireccion.getText().isEmpty() && !jtfEmail.getText().isEmpty()
-                && !jtfSalario.getText().isEmpty() && jpContrasena.getPassword().length != 0;
+        if (!jtfNombreEmpleado.getText().isEmpty() 
+                && !jtfApellidoPaterno.getText().isEmpty()
+                && !jtfApellidoMaterno.getText().isEmpty() 
+                && !jtfCelular.getText().isEmpty()
+                && !jtfDireccion.getText().isEmpty() 
+                && !jtfEmail.getText().isEmpty()
+                && !jtfSalario.getText().isEmpty() 
+                && jpContrasena.getPassword().length != 0) {
+            return true;
+        } else {
+            Message.showErrorMessage("Faltan campos por llenar.");
+            return false;
+        }
     }
 
     /**
@@ -290,251 +346,251 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
     public JCalendar getjCalendar1() {
         return jcFechaIngreso;
     }
-
+    
     public void setjCalendar1(JCalendar jCalendar1) {
         this.jcFechaIngreso = jCalendar1;
     }
-
+    
     public JRadioButtonMenuItem getjRadioButtonMenuItem1() {
         return jRadioButtonMenuItem1;
     }
-
+    
     public void setjRadioButtonMenuItem1(JRadioButtonMenuItem jRadioButtonMenuItem1) {
         this.jRadioButtonMenuItem1 = jRadioButtonMenuItem1;
     }
-
+    
     public JSeparator getjSeparator1() {
         return jSeparator1;
     }
-
+    
     public void setjSeparator1(JSeparator jSeparator1) {
         this.jSeparator1 = jSeparator1;
     }
-
+    
     public JSeparator getjSeparator2() {
         return jSeparator2;
     }
-
+    
     public void setjSeparator2(JSeparator jSeparator2) {
         this.jSeparator2 = jSeparator2;
     }
-
+    
     public JSpinField getjSpinField1() {
         return jSpinField1;
     }
-
+    
     public void setjSpinField1(JSpinField jSpinField1) {
         this.jSpinField1 = jSpinField1;
     }
-
+    
     public JLabel getJlContrasena() {
         return jlContrasena;
     }
-
+    
     public JLabel getJlEmail() {
         return jlEmail;
     }
-
+    
     public void setJlEmail(JLabel jlEmail) {
         this.jlEmail = jlEmail;
     }
-
+    
     public JTextField getJtfEmail() {
         return jtfEmail;
     }
-
+    
     public void setJtfEmail(JTextField jtfEmail) {
         this.jtfEmail = jtfEmail;
     }
-
+    
     public void setJlContrasena(JLabel jlContrasena) {
         this.jlContrasena = jlContrasena;
     }
-
+    
     public JLabel getJlHoraSalida() {
         return jlHoraSalida;
     }
-
+    
     public void setJlHoraSalida(JLabel jlHoraSalida) {
         this.jlHoraSalida = jlHoraSalida;
     }
-
+    
     public JLabel getJlHorarioEntrada() {
         return jlHorarioEntrada;
     }
-
+    
     public void setJlHorarioEntrada(JLabel jlHorarioEntrada) {
         this.jlHorarioEntrada = jlHorarioEntrada;
     }
-
+    
     public JLabel getJlSalario() {
         return jlSalario;
     }
-
+    
     public void setJlSalario(JLabel jlSalario) {
         this.jlSalario = jlSalario;
     }
-
+    
     public JPasswordField getJpContrasena() {
         return jpContrasena;
     }
-
+    
     public void setJpContrasena(JPasswordField jpContrasena) {
         this.jpContrasena = jpContrasena;
     }
-
+    
     public JSpinner getJsHoraE() {
         return jsHoraE;
     }
-
+    
     public void setJsHoraE(JSpinner jsHoraE) {
         this.jsHoraE = jsHoraE;
     }
-
+    
     public JSpinner getJsHoraS() {
         return jsHoraS;
     }
-
+    
     public void setJsHoraS(JSpinner jsHoraS) {
         this.jsHoraS = jsHoraS;
     }
-
+    
     public JSpinner getJsMinutosE() {
         return jsMinutosE;
     }
-
+    
     public void setJsMinutosE(JSpinner jsMinutosE) {
         this.jsMinutosE = jsMinutosE;
     }
-
+    
     public JSpinner getJsMinutosS() {
         return jsMinutosS;
     }
-
+    
     public void setJsMinutosS(JSpinner jsMinutosS) {
         this.jsMinutosS = jsMinutosS;
     }
-
+    
     public JTextField getJtfSalario() {
         return jtfSalario;
     }
-
+    
     public void setJtfSalario(JTextField jtfSalario) {
         this.jtfSalario = jtfSalario;
     }
-
+    
     public JLabel getjLabel1() {
         return jlFecha;
     }
-
+    
     public void setjLabel1(JLabel jLabel1) {
         this.jlFecha = jLabel1;
     }
-
+    
     public JButton getJbAceptar() {
         return jbAceptar;
     }
-
+    
     public void setJbAceptar(JButton jbAceptar) {
         this.jbAceptar = jbAceptar;
     }
-
+    
     public JCalendar getJcFechaIngreso() {
         return jcFechaIngreso;
     }
-
+    
     public void setJcFechaIngreso(JCalendar jcFechaIngreso) {
         this.jcFechaIngreso = jcFechaIngreso;
     }
-
+    
     public JLabel getJlFecha() {
         return jlFecha;
     }
-
+    
     public void setJlFecha(JLabel jlFecha) {
         this.jlFecha = jlFecha;
     }
-
+    
     public JLabel getJlApellidoMaterno() {
         return jlApellidoMaterno;
     }
-
+    
     public void setJlApellidoMaterno(JLabel jlApellidoMaterno) {
         this.jlApellidoMaterno = jlApellidoMaterno;
     }
-
+    
     public JLabel getJlApellidoPaterno() {
         return jlApellidoPaterno;
     }
-
+    
     public void setJlApellidoPaterno(JLabel jlApellidoPaterno) {
         this.jlApellidoPaterno = jlApellidoPaterno;
     }
-
+    
     public JLabel getJlCelular() {
         return jlCelular;
     }
-
+    
     public void setJlCelular(JLabel jlCelular) {
         this.jlCelular = jlCelular;
     }
-
+    
     public JLabel getJlDireccion() {
         return jlDireccion;
     }
-
+    
     public void setJlDireccion(JLabel jlDireccion) {
         this.jlDireccion = jlDireccion;
     }
-
+    
     public JLabel getJlNombreEmpleado() {
         return jlNombreEmpleado;
     }
-
+    
     public void setJlNombreEmpleado(JLabel jlNombreEmpleado) {
         this.jlNombreEmpleado = jlNombreEmpleado;
     }
-
+    
     public JTextField getJtfApellidoMaterno() {
         return jtfApellidoMaterno;
     }
-
+    
     public void setJtfApellidoMaterno(JTextField jtfApellidoMaterno) {
         this.jtfApellidoMaterno = jtfApellidoMaterno;
     }
-
+    
     public JTextField getJtfApellidoPaterno() {
         return jtfApellidoPaterno;
     }
-
+    
     public void setJtfApellidoPaterno(JTextField jtfApellidoPaterno) {
         this.jtfApellidoPaterno = jtfApellidoPaterno;
     }
-
+    
     public JTextField getJtfCelular() {
         return jtfCelular;
     }
-
+    
     public void setJtfCelular(JTextField jtfCelular) {
         this.jtfCelular = jtfCelular;
     }
-
+    
     public JTextField getJtfDireccion() {
         return jtfDireccion;
     }
-
+    
     public void setJtfDireccion(JTextField jtfDireccion) {
         this.jtfDireccion = jtfDireccion;
     }
-
+    
     public JTextField getJtfNombreEmpleado() {
         return jtfNombreEmpleado;
     }
-
+    
     public void setJtfNombreEmpleado(JTextField jtfNombreEmpleado) {
         this.jtfNombreEmpleado = jtfNombreEmpleado;
     }
-
+    
     public void addListener(ListenerAltaEmpleado listener) {
         jbAceptar.addActionListener(listener);
     }

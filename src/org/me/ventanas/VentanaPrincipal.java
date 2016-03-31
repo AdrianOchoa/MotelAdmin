@@ -22,6 +22,12 @@ public class VentanaPrincipal extends JFrame {
     private final PanelPrincipal panelPrincipal;
     private final Menu menu;
 
+    /**
+     * 
+     * @param panelPrincipal
+     * @param menu
+     * @throws IOException 
+     */
     public VentanaPrincipal(PanelPrincipal panelPrincipal, Menu menu) throws IOException {
         super("Administración");
         this.panelPrincipal = panelPrincipal;
@@ -29,6 +35,10 @@ public class VentanaPrincipal extends JFrame {
         init();
     }
 
+    /**
+     * Inicializa los componentes de la ventana
+     * @throws IOException 
+     */
     private void init() throws IOException {
         Image image = ImageIO.read(this.getClass().getResource("/org/images/exe.png"));
         this.setIconImage(image);
