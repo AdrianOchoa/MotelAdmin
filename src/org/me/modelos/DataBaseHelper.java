@@ -82,22 +82,41 @@ public class DataBaseHelper {
         executeQuery(query.toString());
         
         query = new StringBuilder();
-        query.append("GRANT INSERT ON sistema_motel.renta TO '").append(user).append("'@'localhost';");
+        query.append("GRANT INSERT ON sistema_motel.renta TO '")
+                .append(user).append("'@'localhost';");
         executeQuery(query.toString());
         query = new StringBuilder();
-        query.append("GRANT SELECT ON sistema_motel.renta TO '").append(user).append("'@'localhost';");
+        query.append("GRANT SELECT ON sistema_motel.renta TO '")
+                .append(user).append("'@'localhost';");
         executeQuery(query.toString());
         query = new StringBuilder();
-        query.append("GRANT SELECT ON sistema_motel.habitacion TO '").append(user).append("'@'localhost';");
+        query.append("GRANT SELECT ON sistema_motel.habitacion TO '")
+                .append(user).append("'@'localhost';");
         executeQuery(query.toString());
         query = new StringBuilder();
-        query.append("GRANT SELECT ON sistema_motel.producto TO '").append(user).append("'@'localhost';");
+        query.append("GRANT SELECT ON sistema_motel.producto TO '")
+                .append(user).append("'@'localhost';");
         executeQuery(query.toString());
         query = new StringBuilder();
-        query.append("GRANT SELECT ON sistema_motel.reabastecimiento TO '").append(user).append("'@'localhost';");
+        query.append("GRANT SELECT ON sistema_motel.reabastecimiento TO '")
+                .append(user).append("'@'localhost';");
         executeQuery(query.toString());
         query = new StringBuilder();
         query.append("FLUSH PRIVILEGES;");
+        executeQuery(query.toString());
+        return true;
+    }
+    
+    public boolean altaProducto (String nombreProducto, String marca, 
+            String existencias, String precioUnitario, 
+            String precioTotal, String tipo) throws SQLException {
+        StringBuilder query = new StringBuilder();
+        query.append("INSERT INTO sistema_motel.producto (nombreProducto, "
+                + "marca, existencias, precioUnitario, precioTotal, tipo) "
+                + "VALUES ('").append(nombreProducto).append("', '")
+                .append(marca).append("', ").append(existencias)
+                .append(", ").append(precioUnitario).append(", ")
+                .append(precioTotal).append(", '").append(tipo).append("');");
         executeQuery(query.toString());
         return true;
     }

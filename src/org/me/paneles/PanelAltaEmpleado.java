@@ -40,6 +40,7 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
     public boolean datosValidos() {
         return camposLlenos()
                 && passValido()
+                && telefonoValido()
                 && emailValido()
                 && sueldoValido();
     }
@@ -52,6 +53,11 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
         } catch (NumberFormatException ex) {
             return false;
         }
+    }
+
+    public boolean telefonoValido() {
+        String telefono = jtfCelular.getText();
+        return telefono.matches("[0-9]{10}");
     }
 
     //Formato algo@algo.algo

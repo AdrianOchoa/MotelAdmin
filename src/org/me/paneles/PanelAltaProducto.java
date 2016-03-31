@@ -5,27 +5,30 @@
  */
 package org.me.paneles;
 
-import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDateChooser;
 import com.toedter.components.JSpinField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPasswordField;
 import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JSeparator;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import org.me.listeners.ListenerAltaProducto;
 
 /**
  *
  * @author JR
  */
 public class PanelAltaProducto extends javax.swing.JPanel {
+    
+    private final String dbUser;
+    private final String dbPass;
 
     /**
      * Creates new form PanelAltaEmpleado
+     * @param dbUser
+     * @param dbPass
      */
-    public PanelAltaProducto() {
+    public PanelAltaProducto(String dbUser, String dbPass) {
+        this.dbUser = dbUser;
+        this.dbPass = dbPass;
         initComponents();
     }
 
@@ -255,7 +258,45 @@ public class PanelAltaProducto extends javax.swing.JPanel {
         this.jtfTipo = jtfTipo;
     }
 
+   public boolean datosValidos () {
+       return camposLLenos() && existenciasValidas() && precioUValido() && precioTValido();
+   }
    
+   private boolean existenciasValidas () {
+       try {
+           Integer.parseInt(jtfExistencias.getText());
+           return true;
+       } catch (NumberFormatException ex) {
+           return false;
+       }
+   }
+   
+   private boolean camposLLenos () {
+       return !jtfNombreProducto.getText().isEmpty() && 
+               !jtfMarca.getText().isEmpty() && 
+               !jtfExistencias.getText().isEmpty() &&
+               !jtfPrecioUnitario.getText().isEmpty() &&
+               !jtfPrecioTotal.getText().isEmpty() && 
+               !jtfTipo.getText().isEmpty();
+   }
+   
+   private boolean precioTValido () {
+       try {
+           Double.parseDouble(jtfPrecioTotal.getText());
+           return true;
+       } catch (NumberFormatException ex) {
+           return false;
+       }
+   }
+   
+   private boolean precioUValido () {
+       try {
+           Double.parseDouble(jtfPrecioUnitario.getText());
+           return true;
+       } catch (NumberFormatException ex) {
+           return false;
+       }
+   }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -275,4 +316,23 @@ public class PanelAltaProducto extends javax.swing.JPanel {
     private javax.swing.JTextField jtfPrecioUnitario;
     private javax.swing.JTextField jtfTipo;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the dbUser
+     */
+    public String getDbUser() {
+        return dbUser;
+    }
+
+    /**
+     * @return the dbPass
+     */
+    public String getDbPass() {
+        return dbPass;
+    }
+    
+    public void addListener (ListenerAltaProducto listener) {
+        jbAceptar.addActionListener(listener);
+    }
+    
 }
