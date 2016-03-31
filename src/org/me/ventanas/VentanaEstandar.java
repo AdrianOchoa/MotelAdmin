@@ -5,6 +5,7 @@
  */
 package org.me.ventanas;
 
+import java.awt.HeadlessException;
 import java.awt.Image;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -20,6 +21,7 @@ public class VentanaEstandar extends JFrame {
     private final JPanel panel;
     private int x;
     private int y;
+
     
     public VentanaEstandar (JPanel panel) throws IOException {
         this(panel, 800, 600);

@@ -136,6 +136,11 @@ public class DataBaseHelper {
         }
         return r;
     }
+    
+    public ResultSet resultSetFromQuery(String query) throws SQLException{
+        statement = conexion.createStatement();
+        return statement.executeQuery(query);
+    }
 
     public void cerrarConexion() throws SQLException {
         conexion.close();
