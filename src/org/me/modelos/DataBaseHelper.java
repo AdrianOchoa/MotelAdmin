@@ -206,6 +206,12 @@ public class DataBaseHelper {
         return r;
     }
     
+    /**
+     * 
+     * @param query
+     * @return un ResultSet con los datos de la consulta
+     * @throws SQLException 
+     */
     public ResultSet resultSetFromQuery(String query) throws SQLException{
         statement = conexion.createStatement();
         return statement.executeQuery(query);

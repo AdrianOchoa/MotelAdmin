@@ -10,22 +10,19 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.imageio.ImageIO;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.me.modelos.Backup;
 import org.me.modelos.DataBaseHelper;
 import org.me.paneles.PanelAltaEmpleado;
 import org.me.paneles.PanelAltaProducto;
@@ -76,7 +73,6 @@ public class ListenerMenu implements ActionListener {
                 }
                 break;
             case "Lista de empleados":
-
                 String consulta = "select idEmpleado,nombreEmpleado, "
                         + "apellidoPE , apellidoME, celular,direccion,email, fechaIngreso,salario,horarioE, horarioS, turnoSemana from sistema_motel.Empleado;";
                 hacerLista(consulta);
@@ -115,11 +111,13 @@ public class ListenerMenu implements ActionListener {
                 break;
             case "Crear un respaldo":
                 System.out.println("Crear respaldo");
-                crearRespaldo();
+                Backup respaldo = new Backup(user, pass);
+                respaldo.crearRespaldo();
                 break;
             case "Restaurar desde respaldo":
                 System.out.println("Restaurar respaldo");
-                restaurarDesdeRespaldo();
+                Backup restore = new Backup(user, pass);
+                restore.restaurar();
                 break;
             case "Modificar inventario":
                 System.out.println("Modificar inventario");
@@ -200,111 +198,6 @@ public class ListenerMenu implements ActionListener {
             }
         }
 
-    }
-
-    /*
-    * SUMAMENTE IMPORTANTE!!! para que este metodo
-    * funcione es necesario que se agregue a las variables
-    * del entorno del sistema operativo los comandos de mysql
-    * en especial el comando mysqldump
-   ¨* es sumamante importante no tener contraseña vacia
-    * o el programa se colgará esperando instrucciones de entrada-salida
-    * para la contraseña de usuario
-    * NO OLVIDAR ESO
-    *PD2: Si se llegara a eliminar la base de datos, es necesario crearla antes
-    * de ingresar a éste programa
-     */
-    private void crearRespaldo() {
-
-        JFileChooser elegir = new JFileChooser();
-        String respaldo;
-
-        int seleccionar = elegir.showSaveDialog(null);
-
-        try {
-            respaldo = elegir.getSelectedFile().getPath() + ".sql";
-        } catch (Exception e) {
-            return;
-        }
-
-        try {
-            if (seleccionar == JFileChooser.APPROVE_OPTION) {
-                try {
-                    Process p = Runtime
-                            .getRuntime()
-                            .exec("mysqldump -u " + user + " -p" + pass + " sistema_motel ");
-
-                    InputStream is = p.getInputStream();
-                    FileOutputStream fos = new FileOutputStream(respaldo);
-                    byte[] buffer = new byte[1000];
-
-                    int leido = is.read(buffer);
-                    while (leido > 0) {
-                        fos.write(buffer, 0, leido);
-                        leido = is.read(buffer);
-                    }
-
-                    fos.close();
-                    Message.showInfoMessage("Respaldo creado en \n"+respaldo);
-                } catch (Exception e) {
-                    Message.showErrorMessage("Error al crear respaldo \n"+e);
-                }
-            } else {
-                return;
-            }
-
-        } catch (Exception e) {
-            Message.showErrorMessage("Error en la operacion \n" + e);
-        }
-    }
-    
-    
-    private void restaurarDesdeRespaldo() {
-        JFileChooser elegir = new JFileChooser();
-        String respaldo;
-        
-        FileNameExtensionFilter sql = new FileNameExtensionFilter("Archivos sql", "sql");
-        elegir.setFileFilter(sql);
-        int seleccionar = elegir.showOpenDialog(null);
-        
-
-        try {
-            respaldo = elegir.getSelectedFile().getAbsolutePath();
-        } catch (Exception e) {
-            return;
-        }
-
-        try {
-            if (seleccionar == JFileChooser.APPROVE_OPTION) {
-                try {
-                    Process p = Runtime
-                            .getRuntime()
-                            .exec("mysql -u " + user + " -p" + pass + " sistema_motel ");
-                    System.out.println("mysql -u " + user + " -p" + pass + " sistema_motel ");
-
-                    OutputStream os = p.getOutputStream();
-                    FileInputStream fis = new FileInputStream(respaldo);
-                    byte[] buffer = new byte[1000];
-
-                    int leido = fis.read(buffer);
-                    while (leido > 0) {
-                        os.write(buffer, 0, leido);
-                        leido = fis.read(buffer);
-                    }
-                    os.flush();
-                    os.close();
-                    fis.close();
-                    Message.showInfoMessage("Respaldo restaurado desde \n"+respaldo);
-                } catch (Exception e) {
-                    Message.showErrorMessage("Error al restaurar respaldo \n"+e);
-                }
-            } else {
-                return;
-            }
-
-        } catch (Exception e) {
-            Message.showErrorMessage("Error en la operacion \n" + e);
-        }
     }
 
 }
