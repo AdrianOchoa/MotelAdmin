@@ -33,6 +33,7 @@ public class DataBaseHelper {
 
     /**
      * Constructor con host y puertos estándar
+     *
      * @param usuario user de la base de datos
      * @param pass contraseña de la base de datos
      */
@@ -42,6 +43,7 @@ public class DataBaseHelper {
 
     /**
      * Constructor con servidor estandar
+     *
      * @param puerto puerto del servidor mysql
      * @param usuario user de la base de datos
      * @param pass contraseña de la base de datos
@@ -52,6 +54,7 @@ public class DataBaseHelper {
 
     /**
      * Constructor con datos específicos
+     *
      * @param servidor Servidor de la base de datos (conexión remota)
      * @param puerto puerto del servidor mysql
      * @param usuario user de la base de datos
@@ -67,10 +70,10 @@ public class DataBaseHelper {
     }
 
     /**
-     * 
+     *
      * @return true si la conexión se realizó correctamente, falso de otro modo
      * @throws ClassNotFoundException
-     * @throws SQLException 
+     * @throws SQLException
      */
     public boolean iniciarConexion() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
@@ -79,8 +82,9 @@ public class DataBaseHelper {
     }
 
     /**
-     * Esta operación realiza la inserción de un empleado en la base de datos
-     * y crea un usuario en esta
+     * Esta operación realiza la inserción de un empleado en la base de datos y
+     * crea un usuario en esta
+     *
      * @param nombreEmpleado
      * @param apellidoPE
      * @param apellidoME
@@ -95,7 +99,7 @@ public class DataBaseHelper {
      * @param turnoSemana
      * @param user
      * @return true si la operación se realizó correctamente, falso de otro modo
-     * @throws SQLException 
+     * @throws SQLException
      */
     public boolean crearUsuario(String nombreEmpleado, String apellidoPE,
             String apellidoME, String celular, String direccion,
@@ -116,17 +120,17 @@ public class DataBaseHelper {
                 .append(horarioS).append("', '").append(password)
                 .append("', '").append(turnoSemana).append("');");
         executeQuery(query.toString());
-        
+
         query = new StringBuilder();
         query.append("CREATE USER '").append(user)
                 .append("'@'localhost' IDENTIFIED BY '")
                 .append(password).append("';");
         executeQuery(query.toString());
-        
+
         query = new StringBuilder();
         query.append("FLUSH PRIVILEGES;");
         executeQuery(query.toString());
-        
+
         query = new StringBuilder();
         query.append("GRANT INSERT ON sistema_motel.renta TO '")
                 .append(user).append("'@'localhost';");
@@ -152,9 +156,10 @@ public class DataBaseHelper {
         executeQuery(query.toString());
         return true;
     }
-    
+
     /**
      * Esta operación de de alta un producto en la base de datos
+     *
      * @param nombreProducto
      * @param marca
      * @param existencias
@@ -162,10 +167,10 @@ public class DataBaseHelper {
      * @param precioTotal
      * @param tipo
      * @return true si la operación se realizó con éxito, falso de otro modo
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public boolean altaProducto (String nombreProducto, String marca, 
-            String existencias, String precioUnitario, 
+    public boolean altaProducto(String nombreProducto, String marca,
+            String existencias, String precioUnitario,
             String precioTotal, String tipo) throws SQLException {
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO sistema_motel.producto (nombreProducto, "
@@ -180,9 +185,10 @@ public class DataBaseHelper {
 
     /**
      * Este método realiza una inserción sin ResultSet en la base de datos
+     *
      * @param query
      * @return true si se realiza correctamente, false de otro modo
-     * @throws SQLException 
+     * @throws SQLException
      */
     public boolean executeQuery(String query) throws SQLException {
         statement = conexion.createStatement();
@@ -192,9 +198,10 @@ public class DataBaseHelper {
 
     /**
      * Esta operación realiza una query en la base de datos
+     *
      * @param query
      * @return un ResultSet con el resultado de la query
-     * @throws SQLException 
+     * @throws SQLException
      */
     public String executeQueryRS(String query) throws SQLException {
         String r = "";
@@ -205,21 +212,76 @@ public class DataBaseHelper {
         }
         return r;
     }
-    
+
+    /**
+     *
+     * @return un ResultSet con el contenido de la tabla del inventario
+     * @throws SQLException
+     */
+    public ResultSet listaInventario() throws SQLException {
+        ResultSet rs;
+        String query = "select * from Producto";
+        rs = resultSetFromQuery(query);
+        return rs;
+    }
+
     /**
      * 
-     * @param query
-     * @return un ResultSet con los datos de la consulta
+     * @param id El id del producto en el inventario que se buscará
+     * @return El ResultSet con el resultado de la query
      * @throws SQLException 
      */
-    public ResultSet resultSetFromQuery(String query) throws SQLException{
+    public ResultSet busquedaInventarioID(String id) throws SQLException {
+        ResultSet rs;
+        String query = "select * from sistema_motel.Producto where idProducto=" + id + ";";
+        rs = resultSetFromQuery(query);
+        return rs;
+    }
+
+    /**
+     *
+     * @return Un ResultSet con el contenido de la tabla de los empleados
+     * @throws SQLException
+     */
+    public ResultSet listaEmpleados() throws SQLException {
+        ResultSet rs;
+        String query = "select idEmpleado,nombreEmpleado, "
+                + "apellidoPE , apellidoME, celular,direccion,email, fechaIngreso,salario,horarioE, horarioS, turnoSemana from sistema_motel.Empleado;";
+        rs = resultSetFromQuery(query);
+        return rs;
+    }
+
+    /**
+     *
+     * @param id El ID del empleado a buscar
+     * @return un ResultSet con el resultado de la búsqueda del empleado
+     * @throws SQLException
+     */
+    public ResultSet busquedaEmpleadoID(String id) throws SQLException {
+        ResultSet rs;
+        String query = "select idEmpleado,nombreEmpleado, "
+                + "apellidoPE , apellidoME, celular,direccion,email, fechaIngreso,salario,horarioE, "
+                + "horarioS, turnoSemana from sistema_motel.Empleado "
+                + "where idEmpleado = " + id + ";";
+        rs = resultSetFromQuery(query);
+        return rs;
+    }
+
+    /**
+     *
+     * @param query
+     * @return un ResultSet con los datos de la consulta
+     * @throws SQLException
+     */
+    public ResultSet resultSetFromQuery(String query) throws SQLException {
         statement = conexion.createStatement();
         return statement.executeQuery(query);
     }
 
     /**
      * Esta operación cierra la conexión con la base de datos
-     * @throws SQLException 
+     *
+     * @throws SQLException
      */
     public void cerrarConexion() throws SQLException {
         conexion.close();

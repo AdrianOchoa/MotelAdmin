@@ -5,28 +5,17 @@
  */
 package org.me.listeners;
 
-import java.awt.BorderLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JFileChooser;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
 import org.me.modelos.Backup;
-import org.me.modelos.DataBaseHelper;
 import org.me.paneles.PanelAltaEmpleado;
 import org.me.paneles.PanelAltaProducto;
+import org.me.paneles.PanelConsultas;
 import org.me.util.Message;
+import org.me.ventanas.VentanaConsulta;
 import org.me.ventanas.VentanaEstandar;
 
 /**
@@ -73,32 +62,52 @@ public class ListenerMenu implements ActionListener {
                 }
                 break;
             case "Lista de empleados":
-                String consulta = "select idEmpleado,nombreEmpleado, "
-                        + "apellidoPE , apellidoME, celular,direccion,email, fechaIngreso,salario,horarioE, horarioS, turnoSemana from sistema_motel.Empleado;";
-                hacerLista(consulta);
+                try {
+                    PanelConsultas panel = new PanelConsultas(user, pass, 1);
+                    VentanaConsulta ventana = new VentanaConsulta(panel);
+                } catch (ClassNotFoundException | SQLException | IOException ex) {
+                    Message.showErrorMessage("Error.\n" + ex.getMessage());
+                }
                 break;
-            case "Lista del inventario":
-
-                hacerLista("select * from Producto");
-                break;
+            case "Lista del inventario": {
+                try {
+                    PanelConsultas panel = new PanelConsultas(user, pass, 2);
+                    VentanaConsulta ventana = new VentanaConsulta(panel);
+                } catch (ClassNotFoundException | SQLException | IOException ex) {
+                    Message.showErrorMessage("Error.\n" + ex.getMessage());
+                }
+            }
+            break;
             case "Busqueda de empleados":
-                System.out.println("Busqueda de empleados");
-                String id = JOptionPane.showInputDialog(null, "Buscar ID empleado", "Buscar", JOptionPane.QUESTION_MESSAGE);
-                consulta = "select idEmpleado,nombreEmpleado, "
-                        + "apellidoPE , apellidoME, celular,direccion,email, fechaIngreso,salario,horarioE, "
-                        + "horarioS, turnoSemana from sistema_motel.Empleado "
-                        + "where idEmpleado = " + id + ";";
-                System.out.println(consulta);
-                hacerLista(consulta);
+                try {
+                    String id = JOptionPane.showInputDialog(null,
+                            "Buscar ID empleado", "Buscar", JOptionPane.QUESTION_MESSAGE);
+                    if (!id.isEmpty()) {
+                        PanelConsultas panel = new PanelConsultas(user, pass, 3, id);
+                        VentanaConsulta ventana = new VentanaConsulta(panel);
+                    } else {
+                        Message.showErrorMessage("Debe especificar un ID.");
+                    }
+                } catch (ClassNotFoundException | SQLException | IOException ex) {
+                    Message.showErrorMessage("Error.\n" + ex.getMessage());
+                }
                 break;
             case "Baja de empleados":
                 System.out.println("Baja de empleados");
                 break;
             case "Busqueda en el inventario":
-                id = JOptionPane.showInputDialog(null, "Buscar ID producto", "Buscar", JOptionPane.QUESTION_MESSAGE);
-                consulta = "select * from sistema_motel.Producto where idProducto=" + id + ";";
-                System.out.println("Busqueda inventario");
-                hacerLista(consulta);
+                try {
+                    String id = JOptionPane.showInputDialog(null,
+                            "Buscar ID producto", "Buscar", JOptionPane.QUESTION_MESSAGE);
+                    if (!id.isEmpty()) {
+                        PanelConsultas panel = new PanelConsultas(user, pass, 4, id);
+                        VentanaConsulta ventana = new VentanaConsulta(panel);
+                    } else {
+                        Message.showErrorMessage("Debe especificar un ID.");
+                    }
+                } catch (ClassNotFoundException | SQLException | IOException ex) {
+                    Message.showErrorMessage("Error.\n" + ex.getMessage());
+                }
                 break;
             case "Baja en el inventario":
                 System.out.println("baja inventario");
@@ -110,12 +119,10 @@ public class ListenerMenu implements ActionListener {
                 System.out.println("Reporte");
                 break;
             case "Crear un respaldo":
-                System.out.println("Crear respaldo");
                 Backup respaldo = new Backup(user, pass);
                 respaldo.crearRespaldo();
                 break;
             case "Restaurar desde respaldo":
-                System.out.println("Restaurar respaldo");
                 Backup restore = new Backup(user, pass);
                 restore.restaurar();
                 break;
@@ -138,66 +145,6 @@ public class ListenerMenu implements ActionListener {
                 System.out.println("Hellou shabot!");
                 break;
         }
-    }
-
-    private void hacerLista(String consulta) {
-        ResultSet resultados;
-        DataBaseHelper dh = new DataBaseHelper(user, pass);
-
-        try {
-            dh.iniciarConexion();
-            resultados = dh.resultSetFromQuery(consulta); //ejecuta la consulta
-            JTable res = new JTable();
-            DefaultTableModel modelo = new DefaultTableModel();
-
-            JScrollPane desplazar = new JScrollPane(res);
-            String[] columnas = new String[resultados.getMetaData().getColumnCount()];
-
-            for (int i = 0; i < resultados.getMetaData().getColumnCount(); i++) {
-                columnas[i] = resultados.getMetaData().getColumnName(i + 1);
-            }
-
-            modelo.setColumnIdentifiers(columnas);
-            desplazar.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-            desplazar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-            res.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-            res.setFillsViewportHeight(true);
-
-            res.setModel(modelo);
-            JFrame ventana = new JFrame();
-            Image image = ImageIO.read(this.getClass().getResource("/org/images/exe.png"));
-            ventana.setIconImage(image);
-            ventana.setSize(800, 600);
-            ventana.setLocationRelativeTo(null);
-            ventana.setResizable(false);
-            ventana.setTitle("Contenido de la tabla");
-            ventana.setVisible(true);
-            ventana.getContentPane().add(desplazar, BorderLayout.NORTH);
-
-            String fila[] = new String[resultados.getMetaData().getColumnCount()];
-
-            while (resultados.next()) {
-                for (int i = 0; i < resultados.getMetaData().getColumnCount(); i++) {
-                    fila[i] = resultados.getString(i + 1);
-                }
-
-                modelo.addRow(fila);
-            }
-            System.out.println(res.getColumnCount());
-            for (int i = 0; i < res.getColumnCount(); i++) {
-                res.getColumnModel().getColumn(i).setPreferredWidth(200);
-
-            }
-            dh.cerrarConexion();
-        } catch (ClassNotFoundException | SQLException | IOException ex) {
-            if (ex instanceof SQLException) {
-                Message.showErrorMessage("Error en la busqueda en la base de datos, "
-                        + "probable error en el ID insertado, Detalles: \n" + ex);
-            } else {
-                System.out.println(ex);
-            }
-        }
-
     }
 
 }
