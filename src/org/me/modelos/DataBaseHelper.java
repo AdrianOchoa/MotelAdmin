@@ -215,7 +215,7 @@ public class DataBaseHelper {
 
     /**
      *
-     * @return un ResultSet con el contenido de la tabla del inventario
+     * @return un ResultSet con el contenido de la tabla del productos
      * @throws SQLException
      */
     public ResultSet listaInventario() throws SQLException {
@@ -234,6 +234,18 @@ public class DataBaseHelper {
     public ResultSet busquedaInventarioID(String id) throws SQLException {
         ResultSet rs;
         String query = "select * from sistema_motel.Producto where idProducto=" + id + ";";
+        rs = resultSetFromQuery(query);
+        return rs;
+    }
+    
+    /**
+     * 
+     * @return El ResultSet con los productos del inventario
+     * @throws SQLException 
+     */
+    public ResultSet busquedaInventarioID() throws SQLException {
+        ResultSet rs;
+        String query = "select idProducto, nombreProducto from sistema_motel.Producto ;";
         rs = resultSetFromQuery(query);
         return rs;
     }
@@ -266,7 +278,38 @@ public class DataBaseHelper {
         rs = resultSetFromQuery(query);
         return rs;
     }
-
+    
+    /**
+     *
+     * 
+     * @return un ResultSet con todos los empleados e id's
+     * @throws SQLException
+     */
+    public ResultSet busquedaEmpleadoID() throws SQLException {
+        ResultSet rs;
+        String query = "select idEmpleado,nombreEmpleado,apellidoPE,"
+                + "apellidoME, contrasena "
+                + "from sistema_motel.Empleado "
+                ;
+        System.out.println(query);
+        rs = resultSetFromQuery(query);
+        return rs;
+    }
+    
+    
+    /**
+     *
+     * 
+     * @param recibe el id del producto a eliminar
+     * @throws SQLException
+     */
+    public void eliminarProducto(String id) throws SQLException{
+        eliminarReabastecimientoProducto(id);
+        String query = "delete from sistema_motel.Producto where idProducto = "+
+                id+";";
+        statement = conexion.createStatement();
+        statement.execute(query);
+    }
     /**
      *
      * @param query
@@ -286,5 +329,61 @@ public class DataBaseHelper {
     public void cerrarConexion() throws SQLException {
         conexion.close();
     }
+    /**
+     *
+     * 
+     * @param recibe el id del empleado a eliminar
+     * @throws SQLException
+     */
+    public void eliminarEmpleado(Empleado empleado) throws SQLException{
+        
+        String user = empleado.getNombre()+empleado.getApellidoPaterno()+
+                empleado.getApellidoMaterno();
+        
+        System.out.println(user);
+        
+        String query = "drop user '"+user+"'@localhost";
+        executeQuery(query);
+        
+        eliminarReabastecimientoEmpleado(empleado.getId());
+        eliminarRentaEmpleado(empleado.getId());
+        
+        
+        if(user.length() > 15){
+            user = (empleado.getNombre()+empleado.getApellidoPaterno()+
+                    empleado.getApellidoMaterno()).substring(0, 15);
+        }
+        
+        query = "delete from sistema_motel.Empleado where idEmpleado = "+
+                empleado.getId()+";";
+        statement = conexion.createStatement();
+        statement.execute(query);
+    }
+    
+    //Importante si se quiere eliminar empleado o producto
+    //ya que estas dos tablas tienen relacion con reabastecimiento
+    //y renta
+    public void eliminarReabastecimientoEmpleado(String id) throws SQLException{
+        String query = "delete from sistema_motel.Reabastecimiento where Empleado_idEmpleado = "+
+                id+";";
+        statement = conexion.createStatement();
+        statement.execute(query);
+    }
+    
+    public void eliminarReabastecimientoProducto(String id) throws SQLException{
+        String query = "delete from sistema_motel.Reabastecimiento where Producto_idProducto = "+
+                id+";";
+        statement = conexion.createStatement();
+        statement.execute(query);
+    }
+    
+    public void eliminarRentaEmpleado(String id) throws SQLException{
+        String query = "delete from sistema_motel.Renta where Empleado_idEmpleado = "+
+                id+";";
+        statement = conexion.createStatement();
+        statement.execute(query);
+    }
+    
+   
 
 }

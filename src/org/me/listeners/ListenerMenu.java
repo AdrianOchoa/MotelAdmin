@@ -9,14 +9,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.me.modelos.Backup;
+import org.me.modelos.DataBaseHelper;
+import org.me.modelos.Producto;
 import org.me.paneles.PanelAltaEmpleado;
 import org.me.paneles.PanelAltaProducto;
 import org.me.paneles.PanelConsultas;
 import org.me.util.Message;
+import org.me.paneles.PanelID;
 import org.me.ventanas.VentanaConsulta;
 import org.me.ventanas.VentanaEstandar;
+import org.me.ventanas.VentanaID;
+import org.me.util.Utils;
 
 /**
  *
@@ -79,37 +86,67 @@ public class ListenerMenu implements ActionListener {
             }
             break;
             case "Busqueda de empleados":
+
+                PanelID p1;
                 try {
-                    String id = JOptionPane.showInputDialog(null,
-                            "Buscar ID empleado", "Buscar", JOptionPane.QUESTION_MESSAGE);
-                    if (!id.isEmpty()) {
-                        PanelConsultas panel = new PanelConsultas(user, pass, 3, id);
-                        VentanaConsulta ventana = new VentanaConsulta(panel);
-                    } else {
-                        Message.showErrorMessage("Debe especificar un ID.");
-                    }
-                } catch (ClassNotFoundException | SQLException | IOException ex) {
-                    Message.showErrorMessage("Error.\n" + ex.getMessage());
+                    p1 = new PanelID(Utils.elementosEmpleados(user, pass));
+                    p1.addListener(new ListenerBusquedaEmpleados(user, pass, p1));
+                    VentanaID ventana1 = new VentanaID("Busqueda de empleado");
+                    ventana1.setSize(500, 100);
+                    ventana1.add(p1);
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ListenerMenu.class.getName()).log(Level.SEVERE, null, ex);
                 }
+
                 break;
             case "Baja de empleados":
                 System.out.println("Baja de empleados");
+                PanelID panelI;
+                try {
+                    panelI = new PanelID(Utils.elementosEmpleados(user, pass));
+                    panelI.addListener(new ListenerBajaEmpleado(user, pass, panelI));
+                    VentanaID ventana1 = new VentanaID("Baja de empleado");
+                    ventana1.setSize(500, 100);
+                    ventana1.add(panelI);
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                    break;
+                } catch (ClassNotFoundException ex) {
+                    System.out.println(ex);
+                    break;
+                }
                 break;
             case "Busqueda en el inventario":
+                
                 try {
-                    String id = JOptionPane.showInputDialog(null,
-                            "Buscar ID producto", "Buscar", JOptionPane.QUESTION_MESSAGE);
-                    if (!id.isEmpty()) {
-                        PanelConsultas panel = new PanelConsultas(user, pass, 4, id);
-                        VentanaConsulta ventana = new VentanaConsulta(panel);
-                    } else {
-                        Message.showErrorMessage("Debe especificar un ID.");
-                    }
-                } catch (ClassNotFoundException | SQLException | IOException ex) {
-                    Message.showErrorMessage("Error.\n" + ex.getMessage());
+                    p1 = new PanelID(Utils.elementosInventario(user, pass));
+                    p1.addListener(new ListenerBusquedaInventario(user, pass, p1));
+                    VentanaID ventana = new VentanaID("Busqueda en el inventario");
+                    ventana.add(p1);
+                    
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ListenerMenu.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case "Baja en el inventario":
+
+                try {
+                    panelI = new PanelID(Utils.elementosInventario(user, pass));
+                    panelI.addListener(new ListenerBajaInventario(user, pass, panelI));
+                    VentanaID ventana = new VentanaID("Baja en el inventario");
+                    ventana.add(panelI);
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                    break;
+                } catch (ClassNotFoundException ex) {
+                    System.out.println(ex);
+                    break;
+                }
+
                 System.out.println("baja inventario");
                 break;
             case "Ver reporte":
