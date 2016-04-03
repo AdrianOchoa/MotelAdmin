@@ -224,6 +224,19 @@ public class DataBaseHelper {
         rs = resultSetFromQuery(query);
         return rs;
     }
+    
+    /**
+     *
+     * @return un ResultSet con la lista de reabastecimiento por fecha
+     * @throws SQLException
+     */
+    public ResultSet reabastecimiento() throws SQLException {
+        ResultSet rs;
+        String query = "select * from sistema_motel.Reabastecimiento"
+                + " group by fecha";
+        rs = resultSetFromQuery(query);
+        return rs;
+    }
 
     /**
      * 
@@ -382,6 +395,19 @@ public class DataBaseHelper {
                 id+";";
         statement = conexion.createStatement();
         statement.execute(query);
+    }
+    
+    /**
+     *
+     * @return un ResultSet con la tabla de renta
+     * @throws SQLException
+     */
+    public ResultSet renta() throws SQLException{
+         ResultSet rs;
+        String query = "select * from sistema_motel.Renta"
+                + " group by fecha";
+        rs = resultSetFromQuery(query);
+        return rs;
     }
     
    

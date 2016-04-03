@@ -11,10 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import org.me.modelos.Backup;
-import org.me.modelos.DataBaseHelper;
-import org.me.modelos.Producto;
 import org.me.paneles.PanelAltaEmpleado;
 import org.me.paneles.PanelAltaProducto;
 import org.me.paneles.PanelConsultas;
@@ -151,6 +148,12 @@ public class ListenerMenu implements ActionListener {
                 break;
             case "Ver reporte":
                 System.out.println("Ver reporte");
+                    String [] elementos = {"Reporte de reabastecimiento", 
+                        "Reporte de Renta"};
+                    p1 = new PanelID(elementos);
+                    p1.addListener(new ListenerReporte(user, pass, p1));
+                    VentanaID ventana = new VentanaID("Busqueda en el inventario");
+                    ventana.add(p1);
                 break;
             case "Exportar reporte":
                 System.out.println("Reporte");

@@ -20,7 +20,7 @@ public class VentanaID extends JFrame{
 
     private void init(String string) {
          this.setDefaultCloseOperation(2);
-         this.setSize(300,140);
+         this.setSize(300, 100);
          this.setResizable(false);
          this.setTitle(string);
          this.setLocationRelativeTo(null);

@@ -50,7 +50,7 @@ public class PanelConsultas extends JPanel {
         init();
     }
 
-    private void init() throws ClassNotFoundException, SQLException {
+    protected void init() throws ClassNotFoundException, SQLException {
         dbh = new DataBaseHelper(dbUser, dbPass);
         dbh.iniciarConexion();
         switch (consulta) {
@@ -66,6 +66,10 @@ public class PanelConsultas extends JPanel {
             case 4:
                 resultados = dbh.busquedaInventarioID(id);
                 break;
+            case 5:
+                resultados = dbh.reabastecimiento();
+            case 6:
+                resultados = dbh.renta();
         }
         JTable res = new JTable();
         DefaultTableModel modelo = new DefaultTableModel();
