@@ -232,8 +232,14 @@ public class DataBaseHelper {
      */
     public ResultSet reabastecimiento() throws SQLException {
         ResultSet rs;
-        String query = "select * from sistema_motel.Reabastecimiento"
-                + " group by fecha";
+        String query = "select Reabastecimiento.idReabastecimiento, Reabastecimiento.productoEncontrado,\n" +
+            "Reabastecimiento.productoDepositado, Reabastecimiento.fecha, Reabastecimiento.hora, \n" +
+            "Producto.nombreProducto,\n" +
+            "Empleado.nombreEmpleado, Empleado.apellidoPE,\n" +
+            "Empleado.apellidoME, Habitacion_idHabitacion from sistema_motel.Reabastecimiento, sistema_motel.Empleado,\n" +
+            "sistema_motel.Producto where\n" +
+            "Producto.idProducto = Reabastecimiento.Producto_idProducto and \n" +
+            "Empleado.idEmpleado = Reabastecimiento.Empleado_idEmpleado group by Reabastecimiento.fecha;";
         rs = resultSetFromQuery(query);
         return rs;
     }
@@ -404,8 +410,9 @@ public class DataBaseHelper {
      */
     public ResultSet renta() throws SQLException{
          ResultSet rs;
-        String query = "select * from sistema_motel.Renta"
-                + " group by fecha";
+        String query = "select Renta.idRenta, Renta.Habitacion_idHabitacion, Empleado.nombreEmpleado, Empleado.apellidoPE,\n" +
+            "Empleado.apellidoME, Renta.hora, Renta.fecha from sistema_motel.Renta, sistema_motel.Empleado\n" +
+            "where Empleado.idEmpleado = Renta.Empleado_idEmpleado;";
         rs = resultSetFromQuery(query);
         return rs;
     }

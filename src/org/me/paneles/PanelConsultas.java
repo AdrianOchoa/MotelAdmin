@@ -68,8 +68,10 @@ public class PanelConsultas extends JPanel {
                 break;
             case 5:
                 resultados = dbh.reabastecimiento();
+                break;
             case 6:
                 resultados = dbh.renta();
+                break;
         }
         JTable res = new JTable();
         DefaultTableModel modelo = new DefaultTableModel();

@@ -39,10 +39,12 @@ public class ListenerReporte implements ActionListener {
         try {
             switch ((String) p1.getElementos().getSelectedItem()) {
                 case "Reporte de reabastecimiento":
+                    System.out.println("reporte reabastecimiento");
                     panel = new PanelConsultas(user, pass, 5);
                     VentanaConsulta ventanaC = new VentanaConsulta(panel);
                     break;
                 case "Reporte de Renta":
+                    System.out.println("Reporte de renta");
                     panel = new PanelConsultas(user, pass, 6);
                     ventanaC = new VentanaConsulta(panel);
                     break;
