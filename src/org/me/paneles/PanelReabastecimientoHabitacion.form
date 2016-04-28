@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jlFecha" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlHorarioDeposito" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                                      <Component id="jsHoraD" min="-2" pref="48" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jsMinutosD" min="-2" pref="48" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlProductoEncontrado" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jtfProductoEncontrado" min="-2" pref="332" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlProductoDepositado" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jtfProductoDepositado" min="-2" pref="332" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jlIdProducto" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlIdHabitacion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jcbProducto" max="32767" attributes="0"/>
+                                          <Component id="jcbHabitacion" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jcFechaIngreso" min="-2" pref="286" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jbAceptar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="240" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlProductoEncontrado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfProductoEncontrado" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlProductoDepositado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfProductoDepositado" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlHorarioDeposito" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jsHoraD" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jsMinutosD" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jlFecha" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jcFechaIngreso" min="-2" pref="212" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+              <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlIdProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jcbProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlIdHabitacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jcbHabitacion" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jbAceptar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jlProductoEncontrado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cantidad de producto encontrado"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfProductoEncontrado">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlProductoDepositado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cantidad de producto depositado"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfProductoDepositado">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlFecha">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Selecciona en el calendario la fecha de deposito"/>
+      </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JCalendar" name="jcFechaIngreso">
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator1">
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator2">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlIdProducto">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nombre del producto"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlHorarioDeposito">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hora de deposito"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jsHoraD">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel type="list">
+            <ListItem value="00"/>
+            <ListItem value="01"/>
+            <ListItem value="02"/>
+            <ListItem value="03"/>
+            <ListItem value="04"/>
+            <ListItem value="05"/>
+            <ListItem value="06"/>
+            <ListItem value="07"/>
+            <ListItem value="08"/>
+            <ListItem value="09"/>
+            <ListItem value="10"/>
+            <ListItem value="11"/>
+            <ListItem value="12"/>
+            <ListItem value="13"/>
+            <ListItem value="14"/>
+            <ListItem value="15"/>
+            <ListItem value="16"/>
+            <ListItem value="17"/>
+            <ListItem value="18"/>
+            <ListItem value="19"/>
+            <ListItem value="20"/>
+            <ListItem value="21"/>
+            <ListItem value="22"/>
+            <ListItem value="23"/>
+          </SpinnerModel>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jsMinutosD">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel type="list">
+            <ListItem value="00"/>
+            <ListItem value="01"/>
+            <ListItem value="02"/>
+            <ListItem value="03"/>
+            <ListItem value="04"/>
+            <ListItem value="05"/>
+            <ListItem value="06"/>
+            <ListItem value="07"/>
+            <ListItem value="08"/>
+            <ListItem value="09"/>
+            <ListItem value="10"/>
+            <ListItem value="11"/>
+            <ListItem value="12"/>
+            <ListItem value="13"/>
+            <ListItem value="14"/>
+            <ListItem value="15"/>
+            <ListItem value="16"/>
+            <ListItem value="17"/>
+            <ListItem value="18"/>
+            <ListItem value="19"/>
+            <ListItem value="20"/>
+            <ListItem value="21"/>
+            <ListItem value="22"/>
+            <ListItem value="23"/>
+            <ListItem value="24"/>
+            <ListItem value="25"/>
+            <ListItem value="26"/>
+            <ListItem value="27"/>
+            <ListItem value="28"/>
+            <ListItem value="29"/>
+            <ListItem value="30"/>
+            <ListItem value="31"/>
+            <ListItem value="32"/>
+            <ListItem value="33"/>
+            <ListItem value="34"/>
+            <ListItem value="35"/>
+            <ListItem value="36"/>
+            <ListItem value="37"/>
+            <ListItem value="38"/>
+            <ListItem value="39"/>
+            <ListItem value="40"/>
+            <ListItem value="41"/>
+            <ListItem value="42"/>
+            <ListItem value="43"/>
+            <ListItem value="44"/>
+            <ListItem value="45"/>
+            <ListItem value="46"/>
+            <ListItem value="47"/>
+            <ListItem value="48"/>
+            <ListItem value="49"/>
+            <ListItem value="50"/>
+            <ListItem value="51"/>
+            <ListItem value="52"/>
+            <ListItem value="53"/>
+            <ListItem value="54"/>
+            <ListItem value="55"/>
+            <ListItem value="56"/>
+            <ListItem value="57"/>
+            <ListItem value="58"/>
+            <ListItem value="59"/>
+          </SpinnerModel>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbAceptar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Aceptar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlIdHabitacion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ID de la habitacion"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jcbProducto">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(getProductos())"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jcbHabitacion">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(getHabitacionesOcupadas())"/>
+      </AuxValues>
+    </Component>
+  </SubComponents>
+</Form>

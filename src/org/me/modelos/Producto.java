@@ -22,8 +22,6 @@ public class Producto {
 
     public Producto() {
     }
-    
-    
 
     public String getId() {
         return id;

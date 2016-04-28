@@ -49,7 +49,7 @@ public class ListenerAltaProducto implements ActionListener {
             existencias = panel.getJtfExistencias().getText();
             precioU = panel.getJtfPrecioUnitario().getText();
             precioT = panel.getJtfPrecioTotal().getText();
-            tipo = panel.getJtfTipo().getText();
+            tipo = panel.getJcbTipo().getSelectedItem().toString();
             try {
                 dbh.iniciarConexion();
                 dbh.altaProducto(nombreProducto, marca, existencias, precioU, precioT, tipo);
@@ -71,7 +71,6 @@ public class ListenerAltaProducto implements ActionListener {
         panel.getJtfExistencias().setText("");
         panel.getJtfPrecioUnitario().setText("");
         panel.getJtfPrecioTotal().setText("");
-        panel.getJtfTipo().setText("");
     }
 
 }

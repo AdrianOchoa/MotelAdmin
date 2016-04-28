@@ -5,8 +5,6 @@
  */
 package org.me.modelos;
 
-import java.sql.ResultSet;
-
 /**
  *
  * @author JR

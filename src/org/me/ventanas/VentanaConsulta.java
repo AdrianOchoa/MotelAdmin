@@ -26,7 +26,7 @@ public class VentanaConsulta extends JFrame {
     }
 
     private void init() throws IOException {
-        Image image = ImageIO.read(this.getClass().getResource("/org/images/exe.png"));
+        Image image = ImageIO.read(this.getClass().getResource("/org/me/resources/exe.png"));
         setIconImage(image);
         setSize(800, 600);
         setLocationRelativeTo(null);

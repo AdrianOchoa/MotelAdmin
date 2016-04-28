@@ -40,7 +40,7 @@ public class VentanaPrincipal extends JFrame {
      * @throws IOException 
      */
     private void init() throws IOException {
-        Image image = ImageIO.read(this.getClass().getResource("/org/images/exe.png"));
+        Image image = ImageIO.read(this.getClass().getResource("/org/me/resources/exe.png"));
         this.setIconImage(image);
         this.setSize(1000, 700);
         this.setLocationRelativeTo(null);

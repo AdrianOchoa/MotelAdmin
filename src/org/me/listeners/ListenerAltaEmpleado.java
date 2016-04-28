@@ -37,6 +37,7 @@ public class ListenerAltaEmpleado implements ActionListener {
     private String contra;
     private String turno;
     private String user;
+    private String tipo;
     
     /**
      * 
@@ -52,7 +53,11 @@ public class ListenerAltaEmpleado implements ActionListener {
             dbUser = panel.getDbUser();
             dbPass = panel.getDbPassword();
             dbh = new DataBaseHelper(dbUser, dbPass);
-            nombreEmpleado = panel.getJtfNombreEmpleado().getText();
+            String nombres [] = panel.getJtfNombreEmpleado().getText().split("[ ]+");
+            nombreEmpleado = "";
+            for (String nombre : nombres) {
+                nombreEmpleado += nombre;
+            }
             apellidoP = panel.getJtfApellidoPaterno().getText();
             apellidoM = panel.getJtfApellidoMaterno().getText();
             celular = panel.getJtfCelular().getText();
@@ -80,14 +85,13 @@ public class ListenerAltaEmpleado implements ActionListener {
             horaS = salida.toString();
             contra = new String(panel.getJpContrasena().getPassword());
             turno = panel.getJcbTurno().getSelectedItem().toString();
-            user = nombreEmpleado + apellidoP + apellidoM;
-            if(user.length() > 15) {
-                user = user.substring(0, 15);
-            }
-            user = user.toLowerCase();
+            user = panel.getJtfUsuario().getText();
+            tipo = panel.getJcbTipo().getSelectedItem().toString().toLowerCase();
             try {
                 dbh.iniciarConexion();
-                dbh.crearUsuario(nombreEmpleado, apellidoP, apellidoM, celular, direccion, email, fechaIngreso, salario, horaE, horaS, contra, turno, user);
+                dbh.crearUsuario(nombreEmpleado, apellidoP, apellidoM, celular, 
+                        direccion, email, fechaIngreso, salario, horaE, horaS, 
+                        contra, turno, user, tipo);
                 dbh.cerrarConexion();
                 Message.showInfoMessage("Su usuario es: " + user + "\nSe ha dado de alta en el sistema correctamente.");
                 limpiarCampos();
@@ -109,6 +113,8 @@ public class ListenerAltaEmpleado implements ActionListener {
         panel.getJtfEmail().setText("");
         panel.getJtfSalario().setText("");
         panel.getJpContrasena().setText("");
+        panel.getJtfUsuario().setText("");
+        panel.getJpfConfirmar().setText("");
     }
     
 }

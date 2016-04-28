@@ -6,15 +6,15 @@
 package org.me.paneles;
 
 import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDateChooser;
 import com.toedter.components.JSpinField;
+import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPasswordField;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.JSpinner;
-import javax.swing.JTextField;
+import org.me.listeners.ListenerRentaHabitacion;
+import org.me.modelos.DataBaseHelper;
 
 /**
  *
@@ -22,11 +22,36 @@ import javax.swing.JTextField;
  */
 public class PanelRentaHabitacion extends javax.swing.JPanel {
 
+    private final String dbUser;
+    private final String dbPass;
+
     /**
      * Creates new form PanelAltaEmpleado
+     *
+     * @param dbUser
+     * @param dbPass
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
      */
-    public PanelRentaHabitacion() {
+    public PanelRentaHabitacion(String dbUser, String dbPass) throws ClassNotFoundException, SQLException {
+        this.dbUser = dbUser;
+        this.dbPass = dbPass;
         initComponents();
+    }
+
+    public String[] getHabitacionesDisponibles() {
+        try {
+            DataBaseHelper dbh = new DataBaseHelper(dbUser, dbPass);
+            dbh.iniciarConexion();
+            String[] habitaciones;
+            habitaciones = dbh.getHabitacionesDisponibles();
+            dbh.cerrarConexion();
+            return habitaciones;
+        } catch (ClassNotFoundException | SQLException ex) {
+            String[] rs = new String[1];
+            rs[0] = "No hay habitaciones disponibles.";
+            return rs;
+        }
     }
 
     /**
@@ -41,7 +66,6 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jSpinField1 = new com.toedter.components.JSpinField();
         jlApellidoPaterno = new javax.swing.JLabel();
-        jtfIdHabitacion = new javax.swing.JTextField();
         jlIngreso = new javax.swing.JLabel();
         jcFecha = new com.toedter.calendar.JCalendar();
         jSeparator1 = new javax.swing.JSeparator();
@@ -50,6 +74,7 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
         jsHora = new javax.swing.JSpinner();
         jsMinutos = new javax.swing.JSpinner();
         jbAceptar = new javax.swing.JButton();
+        jcbIDHabitacion = new javax.swing.JComboBox(getHabitacionesDisponibles());
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -87,8 +112,8 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
                         .addComponent(jsMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jlApellidoPaterno)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfIdHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbIDHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(211, 211, 211)
                 .addComponent(jbAceptar))
@@ -99,7 +124,7 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlApellidoPaterno)
-                    .addComponent(jtfIdHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbIDHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlHorarioInicio)
@@ -184,8 +209,6 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
         this.jlHorarioInicio = jlHorarioInicio;
     }
 
-   
-
     public JLabel getJlIngreso() {
         return jlIngreso;
     }
@@ -210,18 +233,6 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
         this.jsMinutos = jsMinutos;
     }
 
-    
-
-    public JTextField getJtfIdHabitacion() {
-        return jtfIdHabitacion;
-    }
-
-    public void setJtfIdHabitacion(JTextField jtfIdHabitacion) {
-        this.jtfIdHabitacion = jtfIdHabitacion;
-    }
-    
-
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
@@ -230,11 +241,44 @@ public class PanelRentaHabitacion extends javax.swing.JPanel {
     private com.toedter.components.JSpinField jSpinField1;
     private javax.swing.JButton jbAceptar;
     private com.toedter.calendar.JCalendar jcFecha;
+    private javax.swing.JComboBox jcbIDHabitacion;
     private javax.swing.JLabel jlApellidoPaterno;
     private javax.swing.JLabel jlHorarioInicio;
     private javax.swing.JLabel jlIngreso;
     private javax.swing.JSpinner jsHora;
     private javax.swing.JSpinner jsMinutos;
-    private javax.swing.JTextField jtfIdHabitacion;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the dbUser
+     */
+    public String getDbUser() {
+        return dbUser;
+    }
+
+    /**
+     * @return the dbPass
+     */
+    public String getDbPass() {
+        return dbPass;
+    }
+
+    public void addListener(ListenerRentaHabitacion listener) {
+        jbAceptar.addActionListener(listener);
+    }
+
+    /**
+     * @return the jcbIDHabitacion
+     */
+    public javax.swing.JComboBox getJcbIDHabitacion() {
+        return jcbIDHabitacion;
+    }
+
+    /**
+     * @param jcbIDHabitacion the jcbIDHabitacion to set
+     */
+    public void setJcbIDHabitacion(javax.swing.JComboBox jcbIDHabitacion) {
+        this.jcbIDHabitacion = jcbIDHabitacion;
+    }
+
 }

@@ -56,8 +56,8 @@ public class PanelAltaProducto extends javax.swing.JPanel {
         jlPrecioTotal = new javax.swing.JLabel();
         jtfPrecioTotal = new javax.swing.JTextField();
         jlTipo = new javax.swing.JLabel();
-        jtfTipo = new javax.swing.JTextField();
         jbAceptar = new javax.swing.JButton();
+        jcbTipo = new javax.swing.JComboBox();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -76,6 +76,8 @@ public class PanelAltaProducto extends javax.swing.JPanel {
 
         jbAceptar.setText("Aceptar");
 
+        jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Limpieza", "Higiene Personal", "Ropa", "Consumibles"}));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,8 +86,7 @@ public class PanelAltaProducto extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfPrecioTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlNombreProducto)
                             .addComponent(jlMarca)
                             .addComponent(jlExistencias)
@@ -93,15 +94,17 @@ public class PanelAltaProducto extends javax.swing.JPanel {
                             .addComponent(jlPrecioTotal)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(113, 113, 113)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jtfExistencias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
                                     .addComponent(jtfMarca, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jtfNombreProducto)
                                     .addComponent(jtfPrecioUnitario, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jlTipo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtfTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(93, 93, 93)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfPrecioTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                                    .addComponent(jcbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(218, 218, 218)
                         .addComponent(jbAceptar)))
@@ -131,10 +134,10 @@ public class PanelAltaProducto extends javax.swing.JPanel {
                     .addComponent(jlPrecioTotal)
                     .addComponent(jtfPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlTipo)
-                    .addComponent(jtfTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                    .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addComponent(jbAceptar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -252,23 +255,15 @@ public class PanelAltaProducto extends javax.swing.JPanel {
         this.jtfPrecioUnitario = jtfPrecioUnitario;
     }
 
-    public JTextField getJtfTipo() {
-        return jtfTipo;
-    }
-
-    public void setJtfTipo(JTextField jtfTipo) {
-        this.jtfTipo = jtfTipo;
-    }
-
     /**
      * Comprueba todas las validaciones de los campos
      *
      * @return true si se cumplen todas las validaciones, false de otro modo
      */
     public boolean datosValidos() {
-        return camposLLenos() 
-                && existenciasValidas() 
-                && precioUValido() 
+        return camposLLenos()
+                && existenciasValidas()
+                && precioUValido()
                 && precioTValido();
     }
 
@@ -298,8 +293,7 @@ public class PanelAltaProducto extends javax.swing.JPanel {
                 && !jtfMarca.getText().isEmpty()
                 && !jtfExistencias.getText().isEmpty()
                 && !jtfPrecioUnitario.getText().isEmpty()
-                && !jtfPrecioTotal.getText().isEmpty()
-                && !jtfTipo.getText().isEmpty()) {
+                && !jtfPrecioTotal.getText().isEmpty()) {
             return true;
         } else {
             Message.showErrorMessage("Error.\nFalta llenar alguno de los campos");
@@ -344,6 +338,7 @@ public class PanelAltaProducto extends javax.swing.JPanel {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private com.toedter.components.JSpinField jSpinField1;
     private javax.swing.JButton jbAceptar;
+    private javax.swing.JComboBox jcbTipo;
     private javax.swing.JLabel jlExistencias;
     private javax.swing.JLabel jlMarca;
     private javax.swing.JLabel jlNombreProducto;
@@ -355,7 +350,6 @@ public class PanelAltaProducto extends javax.swing.JPanel {
     private javax.swing.JTextField jtfNombreProducto;
     private javax.swing.JTextField jtfPrecioTotal;
     private javax.swing.JTextField jtfPrecioUnitario;
-    private javax.swing.JTextField jtfTipo;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -374,6 +368,13 @@ public class PanelAltaProducto extends javax.swing.JPanel {
 
     public void addListener(ListenerAltaProducto listener) {
         jbAceptar.addActionListener(listener);
+    }
+
+    /**
+     * @return the jcbTipo
+     */
+    public javax.swing.JComboBox getJcbTipo() {
+        return jcbTipo;
     }
 
 }

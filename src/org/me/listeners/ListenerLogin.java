@@ -29,8 +29,8 @@ public class ListenerLogin implements ActionListener {
     private String password;
 
     /**
-     * 
-     * @param panelLogin 
+     *
+     * @param panelLogin
      */
     public ListenerLogin(PanelLogin panelLogin) {
         this.panelLogin = panelLogin;
@@ -38,29 +38,37 @@ public class ListenerLogin implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        usuario = panelLogin.getJtfUsuario().getText();
-        password = new String(panelLogin.getJpfPass().getPassword());
-        dbh = new DataBaseHelper(usuario, password);
-        try {
-            if (dbh.iniciarConexion()) {
-                SwingUtilities.windowForComponent(panelLogin).dispose();
-                PanelPrincipal panel = new PanelPrincipal();
-                Menu menu = new Menu();
-                ListenerMenu listenerMenu = new ListenerMenu(usuario, password);
-                menu.addListener(listenerMenu);
-                try {
-                    VentanaPrincipal ventana = new VentanaPrincipal(panel, menu);
-                    ListenerVentana listenerVentana = new ListenerVentana();
-                    ventana.addListener(listenerVentana);
-                } catch (IOException ex) {
-                    Message.showErrorMessage(ex.getMessage());
+        if (panelLogin.datosValidos()) {
+            usuario = panelLogin.getJtfUsuario().getText();
+            password = new String(panelLogin.getJpfPass().getPassword());
+            dbh = new DataBaseHelper(usuario, password);
+            try {
+                if (dbh.iniciarConexion()) {
+                    SwingUtilities.windowForComponent(panelLogin).dispose();
+                    PanelPrincipal panel = new PanelPrincipal();
+                    Menu menu = new Menu();
+                    ListenerMenu listenerMenu = new ListenerMenu(usuario, password);
+                    menu.addListener(listenerMenu);
+                    try {
+                        VentanaPrincipal ventana = new VentanaPrincipal(panel, menu);
+                        ListenerVentana listenerVentana = new ListenerVentana();
+                        ventana.addListener(listenerVentana);
+                    } catch (IOException ex) {
+                        Message.showErrorMessage(ex.getMessage());
+                    }
+                } else {
+                    Message.showErrorMessage("Error al conectarse a la base de datos.\nPosibles datos incorrectos.");
+                    clear();
                 }
-            } else {
-                Message.showErrorMessage("Error al conectarse a la base de datos.\nPosibles datos incorrectos.");
+            } catch (ClassNotFoundException | SQLException ex) {
+                Message.showErrorMessage("Error al conectarse a la base de datos.\nPosibles datos incorrectos." + ex.getMessage());
+                clear();
             }
-        } catch (ClassNotFoundException | SQLException ex) {
-            Message.showErrorMessage("Error al conectarse a la base de datos.\nPosibles datos incorrectos.");
         }
+    }
+    
+    private void clear() {
+        panelLogin.getJpfPass().setText("");
     }
 
 }

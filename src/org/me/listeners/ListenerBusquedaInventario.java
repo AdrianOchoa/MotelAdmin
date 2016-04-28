@@ -11,13 +11,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
-import org.me.modelos.DataBaseHelper;
-import org.me.modelos.Empleado;
 import org.me.modelos.Producto;
 import org.me.paneles.PanelConsultas;
 import org.me.paneles.PanelID;
-import org.me.util.Message;
 import org.me.ventanas.VentanaConsulta;
 
 /**
@@ -25,7 +21,7 @@ import org.me.ventanas.VentanaConsulta;
  * @author JR
  */
 class ListenerBusquedaInventario implements ActionListener {
-    
+
     private String user;
     private String pass;
     private PanelID panel;
@@ -34,27 +30,24 @@ class ListenerBusquedaInventario implements ActionListener {
     }
 
     ListenerBusquedaInventario(String user, String pass, PanelID panel) {
-         this.user= user;
-         this.pass = pass;
-         this.panel = panel;
+        this.user = user;
+        this.pass = pass;
+        this.panel = panel;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("ex");
         Producto producto = (Producto) panel.getElementos().getSelectedItem();
         PanelConsultas panel;
         try {
-            panel = new PanelConsultas(user, pass, 3, producto.getId());
+            panel = new PanelConsultas(user, pass, 4, producto.getId());
             VentanaConsulta ventanaC = new VentanaConsulta(panel);
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | IOException ex) {
             Logger.getLogger(ListenerBusquedaInventario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             System.out.println(ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ListenerBusquedaInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
 }

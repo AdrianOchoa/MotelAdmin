@@ -43,7 +43,7 @@ public class PanelLogin extends JPanel {
     }
 
     private void init() throws IOException {
-        image = ImageIO.read(getClass().getResource("/org/images/user_1.png"));
+        image = ImageIO.read(getClass().getResource("/org/me/resources/user_1.png"));
         
         jlUsuario = new JLabel("Nombre de usuario:");
         jlUsuario.setHorizontalTextPosition(CENTER);
@@ -74,6 +74,14 @@ public class PanelLogin extends JPanel {
 
         size = login.getPreferredSize();
         login.setBounds(insets.bottom + 250, insets.right + 400, size.width, size.height);
+    }
+    
+    public boolean datosValidos () {
+        return camposLlenos();
+    }
+    
+    public boolean camposLlenos () {
+        return !jtfUsuario.getText().equals("") && jpfPass.getPassword().length != 0;
     }
 
     @Override

@@ -15,16 +15,17 @@ import javax.swing.JPanel;
  *
  * @author JR
  */
-public class PanelID extends JPanel{
+public class PanelID extends JPanel {
+
     private JComboBox elementos;
     private JButton aceptar;
-    
-    public PanelID(Object[] elementosA){
+
+    public PanelID(Object[] elementosA) {
         super();
         init(elementosA);
     }
-    
-    private void init(Object[] elementosA){
+
+    private void init(Object[] elementosA) {
         this.setLayout(new BorderLayout());
         elementos = new JComboBox(elementosA);
         aceptar = new JButton("Aceptar");
@@ -34,10 +35,9 @@ public class PanelID extends JPanel{
         panelSur.add(aceptar);
         this.add(panelCentro, "Center");
         this.add(panelSur, "South");
-        
     }
-    
-    public void addListener(ActionListener a){
+
+    public void addListener(ActionListener a) {
         aceptar.addActionListener(a);
     }
 
@@ -56,7 +56,5 @@ public class PanelID extends JPanel{
     public void setAceptar(JButton aceptar) {
         this.aceptar = aceptar;
     }
-    
-    
-    
+
 }

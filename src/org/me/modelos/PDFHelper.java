@@ -51,18 +51,18 @@ public class PDFHelper {
         tituloPDF = "REPORTE MENSUAL DE EMPLEADOS";
         //Con esto se comprueba que hay registros
         dbh.iniciarConexion();
-        String columnas = dbh.executeQueryRS("select * from empleado;");
+//        String columnas = dbh.executeQueryRS("select * from empleado;");
         dbh.cerrarConexion();
-        if (columnas.length() > 0) {
-            doc = inicializarDocumento();
-            doc.open();
-            //Se añaden los datos de cajón
-            Paragraph parrafo = setDatos(doc, tituloPDF);
-            parrafoNormal(parrafo);
-            //Tabla de empleados por estado
-            addParrafo(parrafo, doc, "Relación de empleados por estado");
-            addLineaVacia(parrafo, doc);
-        }
+//        if (columnas.length() > 0) {
+//            doc = inicializarDocumento();
+//            doc.open();
+//            //Se añaden los datos de cajón
+//            Paragraph parrafo = setDatos(doc, tituloPDF);
+//            parrafoNormal(parrafo);
+//            //Tabla de empleados por estado
+//            addParrafo(parrafo, doc, "Relación de empleados por estado");
+//            addLineaVacia(parrafo, doc);
+//        }
         return false;
     }
 

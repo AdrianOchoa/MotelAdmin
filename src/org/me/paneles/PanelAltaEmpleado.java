@@ -22,7 +22,7 @@ import org.me.util.Message;
  * @author JR
  */
 public class PanelAltaEmpleado extends javax.swing.JPanel {
-    
+
     private final String dbUser;
     private final String dbPassword;
 
@@ -45,10 +45,23 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
      */
     public boolean datosValidos() {
         return camposLlenos()
-                && passValido()
                 && telefonoValido()
                 && emailValido()
-                && sueldoValido();
+                && sueldoValido()
+                && usuarioValido()
+                && passValido();
+    }
+
+    private boolean usuarioValido() {
+        String user = jtfUsuario.getText();
+        if (user.matches("[a-zA-Z]{5,15}") && !user.matches("[áéíóúÁÉÍÓÚñÑ]")) {
+            return true;
+        } else {
+            Message.showErrorMessage("Error en el campo del usuario.\n"
+                    + "Debe contener sólo letras mayúsculas y minúsculas "
+                    + "sin acentos y sin la letra Ñ y de 5 a 15 caracteres.");
+            return false;
+        }
     }
 
     /**
@@ -63,18 +76,18 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
             return true;
         } catch (NumberFormatException ex) {
             Message.showErrorMessage("Error en el campo del sueldo.\nDebe contener"
-                    + "una cantidad doble válida");
+                    + " una cantidad doble válida");
             return false;
         }
     }
-    
+
     public boolean telefonoValido() {
         String telefono = jtfCelular.getText();
-        if(telefono.matches("[0-9]{10}")) {
+        if (telefono.matches("[0-9]{10}")) {
             return true;
         } else {
             Message.showErrorMessage("Error en el campo teléfono.\n Debe contener"
-                    + "sólo 10 dígitos.");
+                    + " sólo 10 dígitos.");
             return false;
         }
     }
@@ -86,12 +99,12 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
      */
     private boolean emailValido() {
         String email = jtfEmail.getText();
-        if(email.matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+        if (email.matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
             return true;
         } else {
             Message.showErrorMessage("Error en el campo del email.\n Debe contener"
-                    + "un correo electrónico válido de la forma"
-                    + "algo@algo.com");
+                    + " un correo electrónico válido de la forma"
+                    + " algo@algo.com");
             return false;
         }
     }
@@ -104,12 +117,18 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
      */
     private boolean passValido() {
         String pass = new String(jpContrasena.getPassword());
-        if(pass.matches("[a-zA-Z0-9]{8,16}")) {
-            return true;
+        if (pass.matches("[a-zA-Z0-9]{8,16}")) {
+            String pass2 = new String(jpfConfirmar.getPassword());
+            if (pass.equals(pass2)) {
+                return true;
+            } else {
+                Message.showErrorMessage("Error, las contraseñas no coinciden.");
+                return false;
+            }
         } else {
             Message.showErrorMessage("Error en la campo contraseña.\nDebe tener al "
                     + "menos 8 caracteres, máximo 16, y sólo puede"
-                    + "contener minúsculas, mayúsculas y números.");
+                    + " contener minúsculas, mayúsculas y números.");
             return false;
         }
     }
@@ -120,13 +139,13 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
      * @return true si el campo es válido, false de otro modo
      */
     private boolean camposLlenos() {
-        if (!jtfNombreEmpleado.getText().isEmpty() 
+        if (!jtfNombreEmpleado.getText().isEmpty()
                 && !jtfApellidoPaterno.getText().isEmpty()
-                && !jtfApellidoMaterno.getText().isEmpty() 
+                && !jtfApellidoMaterno.getText().isEmpty()
                 && !jtfCelular.getText().isEmpty()
-                && !jtfDireccion.getText().isEmpty() 
+                && !jtfDireccion.getText().isEmpty()
                 && !jtfEmail.getText().isEmpty()
-                && !jtfSalario.getText().isEmpty() 
+                && !jtfSalario.getText().isEmpty()
                 && jpContrasena.getPassword().length != 0) {
             return true;
         } else {
@@ -143,6 +162,7 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jSpinField1 = new com.toedter.components.JSpinField();
@@ -175,434 +195,598 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
         jtfEmail = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jcbTurno = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jcbTipo = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        jtfUsuario = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jpfConfirmar = new javax.swing.JPasswordField();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
+        setLayout(new java.awt.GridBagLayout());
+
         jlNombreEmpleado.setText("Nombre del empleado");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(14, 12, 0, 0);
+        add(jlNombreEmpleado, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 33;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 430;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 0, 0);
+        add(jtfNombreEmpleado, gridBagConstraints);
 
         jlApellidoPaterno.setText("Apellido paterno");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(14, 12, 0, 0);
+        add(jlApellidoPaterno, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 33;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 430;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 0, 0);
+        add(jtfApellidoPaterno, gridBagConstraints);
 
         jlApellidoMaterno.setText("Apellido materno");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(14, 12, 0, 0);
+        add(jlApellidoMaterno, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 33;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 430;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 0, 0);
+        add(jtfApellidoMaterno, gridBagConstraints);
 
         jlCelular.setText("Celular");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(14, 12, 0, 0);
+        add(jlCelular, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 33;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 430;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 0, 0);
+        add(jtfCelular, gridBagConstraints);
 
         jlDireccion.setText("Dirección");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 12, 0, 0);
+        add(jlDireccion, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 25;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 387;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(9, 1, 0, 0);
+        add(jtfDireccion, gridBagConstraints);
 
         jlFecha.setText("Selecciona en el calendario la fecha de ingreso");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = 16;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 12, 0, 0);
+        add(jlFecha, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 24;
+        gridBagConstraints.ipadx = 63;
+        gridBagConstraints.ipady = 48;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 1, 0, 0);
+        add(jcFechaIngreso, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 42;
+        gridBagConstraints.ipadx = 1094;
+        gridBagConstraints.ipady = 9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 12, 0, 12);
+        add(jSeparator1, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.gridwidth = 37;
+        gridBagConstraints.ipadx = 546;
+        gridBagConstraints.ipady = 9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 12, 0, 0);
+        add(jSeparator2, gridBagConstraints);
 
         jlSalario.setText("Salario");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 12, 0, 0);
+        add(jlSalario, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridwidth = 30;
+        gridBagConstraints.ipadx = 412;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        add(jtfSalario, gridBagConstraints);
 
         jlHorarioEntrada.setText("Horario de Entrada");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridwidth = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(31, 12, 0, 0);
+        add(jlHorarioEntrada, gridBagConstraints);
 
         jsHoraE.setModel(new javax.swing.SpinnerListModel(new String[] {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"}));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(29, 2, 0, 0);
+        add(jsHoraE, gridBagConstraints);
 
         jsMinutosE.setModel(new javax.swing.SpinnerListModel(new String[] {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 14;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(29, 12, 0, 0);
+        add(jsMinutosE, gridBagConstraints);
 
         jlHoraSalida.setText("Hora de Salida");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 19;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 21, 0, 0);
+        add(jlHoraSalida, gridBagConstraints);
 
         jsHoraS.setModel(new javax.swing.SpinnerListModel(new String[] {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"}));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridy = 19;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 2, 0, 0);
+        add(jsHoraS, gridBagConstraints);
 
         jsMinutosS.setModel(new javax.swing.SpinnerListModel(new String[] {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 14;
+        gridBagConstraints.gridy = 19;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 12, 0, 0);
+        add(jsMinutosS, gridBagConstraints);
 
         jlContrasena.setText("Contraseña");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 37;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(14, 23, 0, 0);
+        add(jlContrasena, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 41;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 356;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 14, 0, 12);
+        add(jpContrasena, gridBagConstraints);
 
         jbAceptar.setText("Aceptar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 37;
+        gridBagConstraints.gridy = 25;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 18, 16, 0);
+        add(jbAceptar, gridBagConstraints);
 
         jlEmail.setText("Correo electrónico");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 0, 0);
+        add(jlEmail, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 25;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 387;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 1, 0, 0);
+        add(jtfEmail, gridBagConstraints);
 
         jLabel1.setText("Turno");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 21;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(23, 21, 0, 0);
+        add(jLabel1, gridBagConstraints);
 
         jcbTurno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Matutino", "Vespertino", "Nocturno"}));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridy = 21;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 2, 0, 0);
+        add(jcbTurno, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jlSalario)
-                                    .addGap(81, 81, 81)
-                                    .addComponent(jtfSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE))
-                                .addComponent(jlNombreEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jlApellidoPaterno, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jlApellidoMaterno, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jlCelular, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jlDireccion, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jlFecha, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jlHoraSalida)
-                                            .addGap(44, 44, 44)
-                                            .addComponent(jsHoraS, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jlHorarioEntrada)
-                                            .addGap(22, 22, 22)
-                                            .addComponent(jsHoraE, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jsMinutosE, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jsMinutosS, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jbAceptar)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jlContrasena)
-                                        .addGap(270, 270, 270)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(113, 113, 113)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jtfApellidoMaterno, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jtfApellidoPaterno, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jtfNombreEmpleado)
-                                        .addComponent(jtfCelular, javax.swing.GroupLayout.Alignment.TRAILING)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jlEmail)
-                                    .addGap(25, 25, 25)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jtfDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
-                                        .addComponent(jtfEmail))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(85, 85, 85)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcbTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jpContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(jcFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(87, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlNombreEmpleado)
-                    .addComponent(jtfNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlApellidoPaterno)
-                    .addComponent(jtfApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlApellidoMaterno)
-                    .addComponent(jtfApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlCelular)
-                    .addComponent(jtfCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlDireccion)
-                    .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlEmail)
-                    .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlFecha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlSalario)
-                    .addComponent(jtfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlHorarioEntrada)
-                    .addComponent(jsHoraE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jsMinutosE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlHoraSalida)
-                    .addComponent(jsHoraS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jsMinutosS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlContrasena)
-                    .addComponent(jpContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jcbTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbAceptar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel2.setText("Tipo");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 23;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(17, 12, 0, 0);
+        add(jLabel2, gridBagConstraints);
+
+        jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Empleado", "Mucama"}));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridy = 23;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 2, 0, 0);
+        add(jcbTipo, gridBagConstraints);
+
+        jLabel3.setText("Nombre de Usuario");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 37;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(14, 23, 0, 0);
+        add(jLabel3, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 41;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 356;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 14, 0, 12);
+        add(jtfUsuario, gridBagConstraints);
+
+        jLabel4.setText("Confirmar Contraseña");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 37;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(14, 18, 0, 0);
+        add(jLabel4, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 41;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 356;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 14, 0, 12);
+        add(jpfConfirmar, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     public JCalendar getjCalendar1() {
         return jcFechaIngreso;
     }
-    
+
     public void setjCalendar1(JCalendar jCalendar1) {
         this.jcFechaIngreso = jCalendar1;
     }
-    
+
     public JRadioButtonMenuItem getjRadioButtonMenuItem1() {
         return jRadioButtonMenuItem1;
     }
-    
+
     public void setjRadioButtonMenuItem1(JRadioButtonMenuItem jRadioButtonMenuItem1) {
         this.jRadioButtonMenuItem1 = jRadioButtonMenuItem1;
     }
-    
+
     public JSeparator getjSeparator1() {
         return jSeparator1;
     }
-    
+
     public void setjSeparator1(JSeparator jSeparator1) {
         this.jSeparator1 = jSeparator1;
     }
-    
+
     public JSeparator getjSeparator2() {
         return jSeparator2;
     }
-    
+
     public void setjSeparator2(JSeparator jSeparator2) {
         this.jSeparator2 = jSeparator2;
     }
-    
+
     public JSpinField getjSpinField1() {
         return jSpinField1;
     }
-    
+
     public void setjSpinField1(JSpinField jSpinField1) {
         this.jSpinField1 = jSpinField1;
     }
-    
+
     public JLabel getJlContrasena() {
         return jlContrasena;
     }
-    
+
     public JLabel getJlEmail() {
         return jlEmail;
     }
-    
+
     public void setJlEmail(JLabel jlEmail) {
         this.jlEmail = jlEmail;
     }
-    
+
     public JTextField getJtfEmail() {
         return jtfEmail;
     }
-    
+
     public void setJtfEmail(JTextField jtfEmail) {
         this.jtfEmail = jtfEmail;
     }
-    
+
     public void setJlContrasena(JLabel jlContrasena) {
         this.jlContrasena = jlContrasena;
     }
-    
+
     public JLabel getJlHoraSalida() {
         return jlHoraSalida;
     }
-    
+
     public void setJlHoraSalida(JLabel jlHoraSalida) {
         this.jlHoraSalida = jlHoraSalida;
     }
-    
+
     public JLabel getJlHorarioEntrada() {
         return jlHorarioEntrada;
     }
-    
+
     public void setJlHorarioEntrada(JLabel jlHorarioEntrada) {
         this.jlHorarioEntrada = jlHorarioEntrada;
     }
-    
+
     public JLabel getJlSalario() {
         return jlSalario;
     }
-    
+
     public void setJlSalario(JLabel jlSalario) {
         this.jlSalario = jlSalario;
     }
-    
+
     public JPasswordField getJpContrasena() {
         return jpContrasena;
     }
-    
+
     public void setJpContrasena(JPasswordField jpContrasena) {
         this.jpContrasena = jpContrasena;
     }
-    
+
     public JSpinner getJsHoraE() {
         return jsHoraE;
     }
-    
+
     public void setJsHoraE(JSpinner jsHoraE) {
         this.jsHoraE = jsHoraE;
     }
-    
+
     public JSpinner getJsHoraS() {
         return jsHoraS;
     }
-    
+
     public void setJsHoraS(JSpinner jsHoraS) {
         this.jsHoraS = jsHoraS;
     }
-    
+
     public JSpinner getJsMinutosE() {
         return jsMinutosE;
     }
-    
+
     public void setJsMinutosE(JSpinner jsMinutosE) {
         this.jsMinutosE = jsMinutosE;
     }
-    
+
     public JSpinner getJsMinutosS() {
         return jsMinutosS;
     }
-    
+
     public void setJsMinutosS(JSpinner jsMinutosS) {
         this.jsMinutosS = jsMinutosS;
     }
-    
+
     public JTextField getJtfSalario() {
         return jtfSalario;
     }
-    
+
     public void setJtfSalario(JTextField jtfSalario) {
         this.jtfSalario = jtfSalario;
     }
-    
+
     public JLabel getjLabel1() {
         return jlFecha;
     }
-    
+
     public void setjLabel1(JLabel jLabel1) {
         this.jlFecha = jLabel1;
     }
-    
+
     public JButton getJbAceptar() {
         return jbAceptar;
     }
-    
+
     public void setJbAceptar(JButton jbAceptar) {
         this.jbAceptar = jbAceptar;
     }
-    
+
     public JCalendar getJcFechaIngreso() {
         return jcFechaIngreso;
     }
-    
+
     public void setJcFechaIngreso(JCalendar jcFechaIngreso) {
         this.jcFechaIngreso = jcFechaIngreso;
     }
-    
+
     public JLabel getJlFecha() {
         return jlFecha;
     }
-    
+
     public void setJlFecha(JLabel jlFecha) {
         this.jlFecha = jlFecha;
     }
-    
+
     public JLabel getJlApellidoMaterno() {
         return jlApellidoMaterno;
     }
-    
+
     public void setJlApellidoMaterno(JLabel jlApellidoMaterno) {
         this.jlApellidoMaterno = jlApellidoMaterno;
     }
-    
+
     public JLabel getJlApellidoPaterno() {
         return jlApellidoPaterno;
     }
-    
+
     public void setJlApellidoPaterno(JLabel jlApellidoPaterno) {
         this.jlApellidoPaterno = jlApellidoPaterno;
     }
-    
+
     public JLabel getJlCelular() {
         return jlCelular;
     }
-    
+
     public void setJlCelular(JLabel jlCelular) {
         this.jlCelular = jlCelular;
     }
-    
+
     public JLabel getJlDireccion() {
         return jlDireccion;
     }
-    
+
     public void setJlDireccion(JLabel jlDireccion) {
         this.jlDireccion = jlDireccion;
     }
-    
+
     public JLabel getJlNombreEmpleado() {
         return jlNombreEmpleado;
     }
-    
+
     public void setJlNombreEmpleado(JLabel jlNombreEmpleado) {
         this.jlNombreEmpleado = jlNombreEmpleado;
     }
-    
+
     public JTextField getJtfApellidoMaterno() {
         return jtfApellidoMaterno;
     }
-    
+
     public void setJtfApellidoMaterno(JTextField jtfApellidoMaterno) {
         this.jtfApellidoMaterno = jtfApellidoMaterno;
     }
-    
+
     public JTextField getJtfApellidoPaterno() {
         return jtfApellidoPaterno;
     }
-    
+
     public void setJtfApellidoPaterno(JTextField jtfApellidoPaterno) {
         this.jtfApellidoPaterno = jtfApellidoPaterno;
     }
-    
+
     public JTextField getJtfCelular() {
         return jtfCelular;
     }
-    
+
     public void setJtfCelular(JTextField jtfCelular) {
         this.jtfCelular = jtfCelular;
     }
-    
+
     public JTextField getJtfDireccion() {
         return jtfDireccion;
     }
-    
+
     public void setJtfDireccion(JTextField jtfDireccion) {
         this.jtfDireccion = jtfDireccion;
     }
-    
+
     public JTextField getJtfNombreEmpleado() {
         return jtfNombreEmpleado;
     }
-    
+
     public void setJtfNombreEmpleado(JTextField jtfNombreEmpleado) {
         this.jtfNombreEmpleado = jtfNombreEmpleado;
     }
-    
+
     public void addListener(ListenerAltaEmpleado listener) {
         jbAceptar.addActionListener(listener);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private com.toedter.components.JSpinField jSpinField1;
     private javax.swing.JButton jbAceptar;
     private com.toedter.calendar.JCalendar jcFechaIngreso;
+    private javax.swing.JComboBox jcbTipo;
     private javax.swing.JComboBox jcbTurno;
     private javax.swing.JLabel jlApellidoMaterno;
     private javax.swing.JLabel jlApellidoPaterno;
@@ -616,6 +800,7 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
     private javax.swing.JLabel jlNombreEmpleado;
     private javax.swing.JLabel jlSalario;
     private javax.swing.JPasswordField jpContrasena;
+    private javax.swing.JPasswordField jpfConfirmar;
     private javax.swing.JSpinner jsHoraE;
     private javax.swing.JSpinner jsHoraS;
     private javax.swing.JSpinner jsMinutosE;
@@ -627,6 +812,7 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
     private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfNombreEmpleado;
     private javax.swing.JTextField jtfSalario;
+    private javax.swing.JTextField jtfUsuario;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -648,5 +834,26 @@ public class PanelAltaEmpleado extends javax.swing.JPanel {
      */
     public javax.swing.JComboBox getJcbTurno() {
         return jcbTurno;
+    }
+
+    /**
+     * @return the jcbTipo
+     */
+    public javax.swing.JComboBox getJcbTipo() {
+        return jcbTipo;
+    }
+
+    /**
+     * @return the jpfConfirmar
+     */
+    public javax.swing.JPasswordField getJpfConfirmar() {
+        return jpfConfirmar;
+    }
+
+    /**
+     * @return the jtfUsuario
+     */
+    public javax.swing.JTextField getJtfUsuario() {
+        return jtfUsuario;
     }
 }

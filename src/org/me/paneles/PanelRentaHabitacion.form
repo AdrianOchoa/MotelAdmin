@@ -45,8 +45,8 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jlApellidoPaterno" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jtfIdHabitacion" min="-2" pref="391" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jcbIDHabitacion" min="-2" pref="368" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -62,7 +62,7 @@
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jlApellidoPaterno" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtfIdHabitacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jcbIDHabitacion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -92,8 +92,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="ID de la habitaci&#xf3;n"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jtfIdHabitacion">
     </Component>
     <Component class="javax.swing.JLabel" name="jlIngreso">
       <Properties>
@@ -215,6 +213,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Aceptar"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jcbIDHabitacion">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(getHabitacionesDisponibles())"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

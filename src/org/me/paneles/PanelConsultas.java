@@ -61,7 +61,7 @@ public class PanelConsultas extends JPanel {
                 resultados = dbh.listaInventario();
                 break;
             case 3:
-                resultados = dbh.busquedaEmpleadoID(id);
+                resultados = dbh.busquedaDatosEmpleadoID(id);
                 break;
             case 4:
                 resultados = dbh.busquedaInventarioID(id);
@@ -100,10 +100,8 @@ public class PanelConsultas extends JPanel {
 
             modelo.addRow(fila);
         }
-        System.out.println(res.getColumnCount());
         for (int i = 0; i < res.getColumnCount(); i++) {
             res.getColumnModel().getColumn(i).setPreferredWidth(200);
-
         }
         dbh.cerrarConexion();
     }

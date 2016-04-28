@@ -5,12 +5,12 @@
  */
 package org.me.ventanas;
 
-import java.awt.HeadlessException;
 import java.awt.Image;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -52,12 +52,13 @@ public class VentanaEstandar extends JFrame {
      * @throws IOException 
      */
     private void init () throws IOException {
-        Image image = ImageIO.read(this.getClass().getResource("/org/images/exe.png"));
+        Image image = ImageIO.read(this.getClass().getResource("/org/me/resources/exe.png"));
         this.setIconImage(image);
-        this.setSize(x, y);
+        this.setSize(800,500);
         this.setLocationRelativeTo(null);
-        this.setContentPane(panel);
-        this.setResizable(false);
+        JScrollPane desp = new JScrollPane(panel);
+        this.setContentPane(desp);
+        this.setResizable(true);
         this.setVisible(true);
     }
     

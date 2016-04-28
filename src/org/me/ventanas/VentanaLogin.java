@@ -51,7 +51,7 @@ public class VentanaLogin extends JFrame {
             UnsupportedLookAndFeelException, ClassNotFoundException, 
             InstantiationException, IllegalAccessException {
         UIManager.setLookAndFeel(getSystemLookAndFeelClassName());
-        Image image = ImageIO.read(getClass().getResource("/org/images/exe.png"));
+        Image image = ImageIO.read(getClass().getResource("/org/me/resources/exe.png"));
         setIconImage(image);
         setSize(640, 480);
         setLocationRelativeTo(null);
